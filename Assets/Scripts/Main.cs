@@ -8,24 +8,34 @@ public class Main : MonoBehaviour
     private static void OnAppStart()
     {
 
-        DatabaseHandler.postScore("david-denny", 20, null);
-               
+        // DatabaseHandler.postScore("david-denny", 20, null);
+
         // 
-        DatabaseHandler.getAllScores((UsersAndScores userScores) =>
-        {
-            Debug.Log($"Got all scores - {userScores.dict}");
-
-            
-            foreach (var user in userScores.dict)
-            {
-                string username = user.Key;
-                List<Score> scores = user.Value;
-
-                Debug.Log($"User '{username}' has scores:");
-                foreach(Score score in scores)
+        /*        DatabaseHandler.getAllScores((UsersAndScores userScores) =>
                 {
-                    Debug.Log(score.score);
-                }
+                    Debug.Log($"Got all scores - {userScores.dict}");
+
+
+                    foreach (var user in userScores.dict)
+                    {
+                        string username = user.Key;
+                        List<Score> scores = user.Value;
+
+                        Debug.Log($"User '{username}' has scores:");
+                        foreach(Score score in scores)
+                        {
+                            Debug.Log(score.score);
+                        }
+                    }
+                });*/
+
+
+        DatabaseHandler.getUserScores("david-denny", results =>
+        {
+            Debug.Log("David Denny has scores:");
+            foreach (var item in results)
+            {
+                Debug.Log(item);
             }
         });
     }

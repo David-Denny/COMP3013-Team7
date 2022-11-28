@@ -10,13 +10,33 @@ public class DatabaseHandler
     private static readonly string databaseUrl = $"https://{projectId}-default-rtdb.europe-west1.firebasedatabase.app/";
 
     public delegate void PostScoreCallback();
-    public delegate void GetUsersScoreCallback();
+    public delegate void GetUserScoresCallback(List<string> results);
     public delegate void GetAllScoresCallback(UsersAndScores userScores);
 
     public static void postScore(string username, int score, PostScoreCallback callback)
     {
         RestClient.Post<Score>($"{databaseUrl}scores/{username}.json", new Score(score.ToString())).Then(response => { callback(); });
     }
+
+    public static void getUserScores(string username, GetUserScoresCallback callback)
+    {
+        RestClient.Get($"{databaseUrl}scores/{username}.json").Then(response =>
+        {
+            var jsonObj = JObject.Parse(response.Text);
+            List<string> scores = new List<string>();
+            foreach (KeyValuePair<string, JToken> pair in jsonObj)
+            {
+                var key = pair.Key;
+                string score = pair.Value["score"].ToString();
+
+                scores.Add(score);
+            }
+
+            callback(scores);
+        });
+
+    }
+
 
     public static void getAllScores(GetAllScoresCallback callback)
     {
