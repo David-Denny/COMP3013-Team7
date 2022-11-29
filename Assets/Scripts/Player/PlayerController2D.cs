@@ -20,7 +20,6 @@ public class PlayerController2D : NetworkBehaviour
     private bool grounded = false;
 
     private NetworkVariable<float> moveDirection = new(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    private NetworkVariable<Vector3> position = new();
 
     private void Awake()
     {
@@ -57,14 +56,10 @@ public class PlayerController2D : NetworkBehaviour
             // Check if the player is grounded
             Collider2D result = Physics2D.OverlapBox(transform.position, new Vector2(boxCollider.size.x * 0.95f, 0.1f), 0.0f, groundMask);
             grounded = result != null;
-
-            position.Value = transform.position;
         }
         
         if(IsOwner)
             moveDirection.Value = inputMap.Player.Move.ReadValue<float>();
-        
-        transform.position = position.Value;
     } 
 
     private void FixedUpdate()
