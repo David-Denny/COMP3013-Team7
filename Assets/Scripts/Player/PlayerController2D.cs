@@ -5,8 +5,6 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(BoxCollider2D))]
 public class PlayerController2D : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed;
@@ -46,6 +44,13 @@ public class PlayerController2D : NetworkBehaviour
         {
             // Bind jump function to jump action
             inputMap.Player.Jump.performed += (InputAction.CallbackContext callback) => SubmitJumpRequestServerRPC();
+        }
+
+        // Remove rigidbody from client players
+        if(!NetworkManager.Singleton.IsServer)
+        {
+            Destroy(rb);
+            Destroy(boxCollider);
         }
     }
 
