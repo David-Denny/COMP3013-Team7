@@ -9,7 +9,6 @@ public class UsersAndScores
     {
     }
 
-
     public void add(string username, Score score)
     {
         if (dict.ContainsKey(username))
@@ -27,5 +26,15 @@ public class UsersAndScores
             List<Score> list = new List<Score> { score };
             dict.Add(username, list);
         }
+    }
+
+    public List<Score> getUserScores(string username)
+    {
+        if (dict.ContainsKey(username))
+        {
+            List<Score> list = dict[username];
+            return list;
+        }
+        return null;
     }
 }
