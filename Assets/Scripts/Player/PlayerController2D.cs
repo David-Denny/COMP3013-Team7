@@ -21,19 +21,8 @@ public class PlayerController2D : NetworkBehaviour
 
     private void Awake()
     {
-        inputMap = new InputMap();
         rb = GetComponent<Rigidbody2D>();
         boxCollider= GetComponent<BoxCollider2D>();
-    }
-
-    private void OnEnable()
-    {
-        inputMap.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputMap.Disable();
     }
 
     public override void OnNetworkSpawn()
@@ -42,6 +31,10 @@ public class PlayerController2D : NetworkBehaviour
 
         if(IsOwner)
         {
+            // Create input map
+            inputMap = new InputMap();
+            inputMap.Enable();
+
             // Bind jump function to jump action
             inputMap.Player.Jump.performed += (InputAction.CallbackContext callback) => SubmitJumpRequestServerRPC();
         }
