@@ -14,21 +14,25 @@ public class PlayerController2D : NetworkBehaviour
     private InputMap inputMap;
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
+    private Animator animator;
 
     private bool grounded = false;
 
     private NetworkVariable<float> moveDirection = new(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    public bool Moving {  get { return rb.velocity.x != 0.0f; } }
+    public bool Grounded { get { return grounded; } }
+    public float VelocityX { get { return rb.velocity.x; } }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider= GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
 
     public override void OnNetworkSpawn()
     {
-        GetComponentInChildren<SpriteRenderer>().color = IsOwner ? Color.blue : Color.red;
-
         if(IsOwner)
         {
             // Create input map
@@ -54,6 +58,9 @@ public class PlayerController2D : NetworkBehaviour
             // Check if the player is grounded
             Collider2D result = Physics2D.OverlapBox(transform.position, new Vector2(boxCollider.size.x * 0.95f, 0.1f), 0.0f, groundMask);
             grounded = result != null;
+
+            animator.SetBool("moving", rb.velocity.x != 0.0f);
+            animator.SetBool("grounded", grounded);
         }
         
         if(IsOwner)
