@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tileset_Side_Top
+      name: Base
       rect:
         serializedVersion: 2
         x: 1
@@ -113,20 +113,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c96f7daaaa817134d88b1fe2bd36ef8d
-      internalID: 929293436
+      spriteID: eaee82e75af62004fa0baac02a009c4b
+      internalID: 402433594
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Side_Right
+      name: Side
       rect:
         serializedVersion: 2
         x: 18
@@ -134,62 +134,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c90f848a96fae040a165a0ae62a402f
-      internalID: -2004476259
+      spriteID: 76b9ac1cd79f8bc499853cf2a7ce2af5
+      internalID: 533570641
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Side_Bottom
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 94
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e79a5f79c8326104397eeda9b1cb00f5
-      internalID: -322823898
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Side_Left
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 94
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 559d8ec15f64b8a4ebde26e52fbfad1e
-      internalID: -1712480368
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Corner_TopLeft
+      name: Side_Both
       rect:
         serializedVersion: 2
         x: 35
@@ -197,20 +155,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4099dfa2b5c36642bd452c8acc5eb87
-      internalID: 1243830980
+      spriteID: 221cc25553ef50849a26cd861907eb41
+      internalID: 1277550323
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Corner_TopRight
+      name: Corner
       rect:
         serializedVersion: 2
         x: 52
@@ -218,188 +176,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 092c315f7accd1c42912a6a2407c6797
-      internalID: -898314943
+      spriteID: a9c86e34715fe2f4da2cd9fa4ceb461e
+      internalID: 255708408
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Corner_BottomLeft
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 94
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c3466a94186e12c46a654af85262a19c
-      internalID: -1737365402
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Corner_BottomRight
-      rect:
-        serializedVersion: 2
-        x: 52
-        y: 94
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7586b2b6c4c04134780ffb5eab4c553b
-      internalID: 1000290550
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Base
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 9
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 27283e6aa0d4e30458360adbc214109d
-      internalID: 1910662957
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_TopLeft
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 77
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8dd185da3ed1ac4428882829bd6077e1
-      internalID: 1676124642
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_TopRight
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 77
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef2de908b77639b45b184e08602e3693
-      internalID: -1165518758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_BottomLeft
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 60
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3411245811603474a8c667528bb21120
-      internalID: 210686684
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_BottomRight
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 60
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a0f04360ffb65584ba6a7791c28cd400
-      internalID: -2085422874
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Outer_All
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 9
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d42f77b1d095cb748bbf87d710ea0f93
-      internalID: 35077309
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_End_Top
+      name: End
       rect:
         serializedVersion: 2
         x: 69
@@ -407,41 +197,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7aac39d5495310542ab8832b97be4d9b
-      internalID: -1933104780
+      spriteID: 838d0b0f79256ff4790fee2ecfc27c3a
+      internalID: 203362808
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_End_Left
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 94
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e19c9873a0ce80c409c6892f634d286e
-      internalID: -2054136534
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_End_Right
+      name: All
       rect:
         serializedVersion: 2
         x: 86
@@ -449,41 +218,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 885090bbf081bf445a7557b65df1d6f7
-      internalID: 2044604627
+      spriteID: a5a665279a92bf3408eb1e2a9239f18b
+      internalID: 679795546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_End_Bottom
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 94
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5f140d40ff2fb8742b6c3a221b8646fe
-      internalID: -342705275
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Horizontal
+      name: Corner_Inner
       rect:
         serializedVersion: 2
         x: 103
@@ -491,20 +239,146 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a22eb299625a41b438a52d6fc55230c4
-      internalID: -25502569
+      spriteID: 83ad04ca9a54db3499f6870e86e81965
+      internalID: -1152374980
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Vertical
+      name: Inner
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 94
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f3df208a8de947449abd53f23ca0491
+      internalID: 2102576284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inner_Side
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 94
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53418f11f8f37a74bbecd9dafcf09c9c
+      internalID: 916542006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inner_Corner
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 94
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc223e3bd827dfd4ca641ee6a976289c
+      internalID: -1760952760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inner_All
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 94
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0c69c1d709eda4418b9b54f4b258b7f
+      internalID: 1172525432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Side_Inner_Side
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 94
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c8df3d075c8a194cadd5c7078561869
+      internalID: -345865631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Side_Inner_Right
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 94
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5700266b2ca907341ad9da49ec3298dc
+      internalID: 147052400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Side_Inner_Left
       rect:
         serializedVersion: 2
         x: 103
@@ -512,539 +386,14 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b3ebdfa828e1b4c4dbb12c014144ca9a
-      internalID: -1844599424
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Corner_Inner_TopLeft
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 77
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ff5dfdf2924e0249830568cf072ccbd
-      internalID: 281738983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Corner_Inner_TopRight
-      rect:
-        serializedVersion: 2
-        x: 52
-        y: 77
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a121724711b135489cefd54f9c717e3
-      internalID: 397599750
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Corner_Inner_BottomLeft
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 60
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 865bbb90c15fa374398b5d8959480c6b
-      internalID: -994424066
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Corner_Inner_BottomRight
-      rect:
-        serializedVersion: 2
-        x: 52
-        y: 60
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f82a31c7fb7b4004cbdff059026d1a2f
-      internalID: 1038859024
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_All
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 9
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 739dcf20fa84a9a4ebe2aa443b106ba3
-      internalID: 1844732817
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Junction_Top
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 43
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fe7aad62a6e74a44a8d1366e9de1d320
-      internalID: -1906710934
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Junction_Right
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 43
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0de4a2cad60229c4fbc6aaa7f4b24e5b
-      internalID: 904793057
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Junction_Left
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 26
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2be270d4adb00b045bacbdd7076a8e78
-      internalID: -226132975
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Junction_Bottom
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 26
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e5caea2d6ed9704a80bb8c6505e8b5c
-      internalID: 1732914154
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Side_Bottom_Inner_Right
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 43
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d815205fc040a540b50908d15abcd56
-      internalID: -533554728
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Side_Bottom_Inner_Left
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 43
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 55698792aab6c824fa4b23b436b25e19
-      internalID: -331114573
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Side_Left_Inner_Bottom
-      rect:
-        serializedVersion: 2
-        x: 52
-        y: 43
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 920741193d69107428ea5dcc4daf8053
-      internalID: -574243000
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Side_Left_Inner_Top
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 43
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e0ff1f3019a7024e8f097cb427720b5
-      internalID: -1329771816
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Side_Right_Inner_Top
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 26
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1b919a499652f184ca8e64cd527d0ec6
-      internalID: 109168301
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Side_Top_Inner_Left
-      rect:
-        serializedVersion: 2
-        x: 52
-        y: 26
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c6747730d09279499f486f2c5215727
-      internalID: 1636997173
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Side_Right_Inner_Bottom
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 26
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 03d94d24c0b541549830f6bbdd50c883
-      internalID: 493352284
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Side_Top_Inner_Right
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 26
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98990509b82379d4c8f84ae4a666a8a9
-      internalID: -1765865208
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_Top
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 77
-        width: 16
-        height: 16
-      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b01039fbc94c4f74eb096f425cbfc44a
-      internalID: 2045078000
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_Right
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 77
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 12f27bc62598a5646bbb34f7acc0bad3
-      internalID: -219190325
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_Bottom
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 60
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 35fa2fbf12b71be408e7b5937cf4a373
-      internalID: -1597949119
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_Left
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 60
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41a1c484b4b29814d9bd0aaaf91a7314
-      internalID: -580306919
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_Corner_TopLeft
-      rect:
-        serializedVersion: 2
-        x: 52
-        y: 9
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 81fbb618ca6af784aa4cf1b28336757f
-      internalID: -933762706
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_Corner_TopRight
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 9
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 083874a2e5c766347b6afb084f7d2b3f
-      internalID: 1311554377
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_Corner_BottomLeft
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 9
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a68ac522bdbc8e4468df128f0ee848b6
-      internalID: 1071866727
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Inner_Corner_BottomRight
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 9
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 69b3ad6c95ec34648afe210b1e7b542c
-      internalID: 597560054
+      spriteID: 6f817e02f73e40b4b8735136cccbf5e0
+      internalID: -18354814
       vertices: []
       indices: 
       edges: []
@@ -1060,51 +409,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tileset_Side_Bottom_Inner_Right: -533554728
-      Tileset_Side_Right: -2004476259
-      Tileset_Corner_Inner_BottomRight: 1038859024
-      Tileset_Inner_All: 1844732817
-      Tileset_Corner_Inner_BottomLeft: -994424066
-      Tileset_Junction_Bottom: 1732914154
-      Tileset_Inner_BottomLeft: 210686684
-      Tileset_Corner_BottomLeft: -1737365402
-      Tileset_Corner_Inner_TopRight: 397599750
-      Tileset_Inner_Corner_BottomLeft: 1071866727
-      Tileset_Outer_All: 35077309
-      Tileset_Side_Right_Inner_Top: 109168301
-      Tileset_Inner_Right: -219190325
-      Tileset_Junction_Right: 904793057
-      Tileset_Side_Right_Inner_Bottom: 493352284
-      Tileset_Side_Top_Inner_Right: -1765865208
-      Tileset_End_Bottom: -342705275
-      Tileset_End_Right: 2044604627
-      Tileset_Side_Left_Inner_Bottom: -574243000
-      Tileset_Inner_BottomRight: -2085422874
-      Tileset_End_Top: -1933104780
-      Tileset_Side_Bottom: -322823898
-      Tileset_Side_Top: 929293436
-      Tileset_Inner_Top: 2045078000
-      Tileset_End_Left: -2054136534
-      Tileset_Inner_Left: -580306919
-      Tileset_Junction_Left: -226132975
-      Tileset_Inner_Bottom: -1597949119
-      Tileset_Inner_Corner_TopRight: 1311554377
-      Tileset_Base: 1910662957
-      Tileset_Inner_Corner_TopLeft: -933762706
-      Tileset_Corner_BottomRight: 1000290550
-      Tileset_Inner_TopLeft: 1676124642
-      Tileset_Inner_TopRight: -1165518758
-      Tileset_Corner_Inner_TopLeft: 281738983
-      Tileset_Side_Bottom_Inner_Left: -331114573
-      Tileset_Corner_TopRight: -898314943
-      Tileset_Inner_Corner_BottomRight: 597560054
-      Tileset_Side_Left_Inner_Top: -1329771816
-      Tileset_Horizontal: -25502569
-      Tileset_Side_Left: -1712480368
-      Tileset_Junction_Top: -1906710934
-      Tileset_Vertical: -1844599424
-      Tileset_Side_Top_Inner_Left: 1636997173
-      Tileset_Corner_TopLeft: 1243830980
+      Inner_All: 1172525432
+      Side_Inner_Side: -345865631
+      Side_Inner_Right: 147052400
+      Side_Both: 1277550323
+      Side: 533570641
+      Corner_Inner: -1152374980
+      All: 679795546
+      Corner: 255708408
+      Inner_Side: 916542006
+      Inner_Corner: -1760952760
+      End: 203362808
+      Side_Inner_Left: -18354814
+      Base: 402433594
+      Inner: 2102576284
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
