@@ -4,32 +4,31 @@ using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(NetworkManager))]
+[RequireComponent(typeof(UnityTransport))]
 public class ThinkFastNetworkManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _lobbyCanvas, _feedbackText;
 
-    [SerializeField] private NetworkManager networkManager;
+    private NetworkManager _networkManager;
+    private UnityTransport _transport;
+
     private string _inputFieldContent = "";
-
-    private static ThinkFastNetworkManager _thinkFastNetworkManager;
-    private GameObject _lobbyCanvas, _feedbackText;
     private bool _isConnected = false;
-    
-    public UnityTransport transport;
 
     private void Awake()
     {
-        transport = GetComponent<UnityTransport>();
-        _lobbyCanvas = GameObject.Find("LobbyCanvas");
-        _feedbackText = GameObject.Find("Feedback");
-        networkManager.OnServerStarted += OnHostStarted;
-        networkManager.OnClientConnectedCallback += OnClientConnected;
-        networkManager.OnClientDisconnectCallback += OnClientDisconnected;
+        _networkManager = GetComponent<NetworkManager>();
+        _transport = GetComponent<UnityTransport>();
+        _networkManager.OnServerStarted += OnHostStarted;
+        _networkManager.OnClientConnectedCallback += OnClientConnected;
+        _networkManager.OnClientDisconnectCallback += OnClientDisconnected;
     }
 
     public void SetIP(string ip) 
     {
-        transport.ConnectionData.Address = ip;
-        transport.ConnectionData.Port = 7777;
+        _transport.ConnectionData.Address = ip;
+        _transport.ConnectionData.Port = 7777;
     }
 
     private void ShowError(string message)
@@ -46,10 +45,8 @@ public class ThinkFastNetworkManager : MonoBehaviour
     public void OnHostButtonClicked()
     {
         SetIP("0.0.0.0");
-        if (!networkManager.StartHost())
-        {
+        if (!_networkManager.StartHost())
             ShowError("Error starting host");
-        };
     }
 
     public void OnJoinButtonClicked()
@@ -71,21 +68,21 @@ public class ThinkFastNetworkManager : MonoBehaviour
         {
             SetIP("127.0.0.1");
         }
-        Debug.Log(networkManager.StartClient());
+        Debug.Log(_networkManager.StartClient());
     }
     
     private void OnHostStarted()
     {
-        Debug.Log("Launched Host - " + transport.ConnectionData.ServerEndPoint);
+        Debug.Log("Launched Host - " + _transport.ConnectionData.ServerEndPoint);
         _lobbyCanvas.SetActive(false);
     }
     
     private void OnClientDisconnected(ulong id)
     {
-        if (networkManager.IsHost && networkManager.ConnectedClients.Count == 2)
+        if (_networkManager.IsHost && _networkManager.ConnectedClients.Count == 2)
         {
             Debug.Log("Client left the game");
-            networkManager.Shutdown();
+            _networkManager.Shutdown();
             // todo Handle the client leaving the game
             return;
         }
@@ -99,13 +96,13 @@ public class ThinkFastNetworkManager : MonoBehaviour
 
     private void OnClientConnected(ulong obj)
     {
-        if (networkManager.IsConnectedClient)
+        if (_networkManager.IsConnectedClient)
         {
             _isConnected = true;
             _lobbyCanvas.SetActive(false);
         }
 
-        if (networkManager.IsHost && networkManager.ConnectedClients.Count == 2)
+        if (_networkManager.IsHost && _networkManager.ConnectedClients.Count == 2)
         {
             Debug.Log("START GAME");
             // todo start game   

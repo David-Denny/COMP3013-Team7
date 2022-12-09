@@ -5890,7 +5890,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -10762,5 +10762,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2bd23c1cdbb3c47965350493219941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkManager: {fileID: 2092152285}
-  transport: {fileID: 2092152284}
+  _lobbyCanvas: {fileID: 1358036515}
+  _feedbackText: {fileID: 1850688685}
