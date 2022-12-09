@@ -9,7 +9,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Assertions;
 using System.Runtime.Serialization.Json;
 
-public class Main : MonoBehaviour
+public class TestDatabaseHandler : MonoBehaviour
 {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void OnAppStart()
