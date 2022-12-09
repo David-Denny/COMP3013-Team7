@@ -82,16 +82,19 @@ public class ThinkFastNetworkManager : MonoBehaviour
     
     private void OnClientDisconnected(ulong id)
     {
-        if (networkManager.IsHost)
+        if (networkManager.IsHost && networkManager.ConnectedClients.Count == 2)
         {
             Debug.Log("Client left the game");
             networkManager.Shutdown();
+            // todo Handle the client leaving the game
             return;
         }
         if (!_isConnected)
         {
             ShowError("Failed to connect to Server");           
         }
+        // todo Handle the host leaving the game for whatever reason
+        Debug.Log("Host died");
     }
 
     private void OnClientConnected(ulong obj)
