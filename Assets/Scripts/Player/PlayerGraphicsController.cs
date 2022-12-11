@@ -31,7 +31,9 @@ public class PlayerGraphicsController : NetworkBehaviour
         {
             animator.SetBool("moving", playerController.Moving);
             animator.SetBool("grounded", playerController.Grounded);
-            bool flip = playerController.VelocityX <= 0.0f && (playerController.VelocityX < 0.0f || playerRenderer.flipX);
+            bool flip = playerRenderer.flipX;
+            if (playerController.VelocityX < -0.1f && !flip) flip = true;
+            else if (playerController.VelocityX > 0.1f && flip) flip = false;
             SetPlayerFacingClientRpc(flip);
         }
     }

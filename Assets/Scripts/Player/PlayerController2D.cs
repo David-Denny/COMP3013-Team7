@@ -26,7 +26,7 @@ public class PlayerController2D : NetworkBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        boxCollider= GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     public override void OnNetworkSpawn()
@@ -39,6 +39,15 @@ public class PlayerController2D : NetworkBehaviour
 
             // Bind jump function to jump action
             inputMap.Player.Jump.performed += (InputAction.CallbackContext callback) => SubmitJumpRequestServerRPC();
+
+            // Set camera to target player
+            var cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
+            if(cameraObject != null)
+            {
+                cameraObject.TryGetComponent(out CameraController cameraController);
+                if(cameraController != null)
+                    cameraController.Target = this;
+            }
         }
 
         // Remove rigidbody from client players
