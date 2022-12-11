@@ -7,84 +7,51 @@ using UnityEngine.InputSystem;
 
 public class PlayerController2D : NetworkBehaviour
 {
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpSpeed;
-    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _jumpSpeed;
+    [SerializeField] private LayerMask _groundMask;
 
-    private InputMap inputMap;
-    private Rigidbody2D rb;
-    private BoxCollider2D boxCollider;
+    private InputMap _inputMap;
+    private Rigidbody2D _rigidbody;
+    private BoxCollider2D _collider;
 
-    private bool grounded = false;
+    private bool _grounded = false;
 
-    private NetworkVariable<float> moveDirection = new(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-
-    public bool Moving {  get { return rb.velocity.x != 0.0f; } }
-    public bool Grounded { get { return grounded; } }
-    public float VelocityX { get { return rb.velocity.x; } }
+    public bool Moving {  get { return _rigidbody.velocity.x != 0.0f; } }
+    public bool Grounded { get { return _grounded; } }
+    public float MoveDirection { get { return _rigidbody.velocity.x; } }
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<BoxCollider2D>();
     }
 
-    public override void OnNetworkSpawn()
+    private void Start()
     {
-        if(IsOwner)
-        {
-            // Create input map
-            inputMap = new InputMap();
-            inputMap.Enable();
+        // Create input map
+        _inputMap = new InputMap();
+        _inputMap.Enable();
 
-            // Bind jump function to jump action
-            inputMap.Player.Jump.performed += (InputAction.CallbackContext callback) => SubmitJumpRequestServerRPC();
-
-            // Set camera to target player
-            var cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
-            if(cameraObject != null)
-            {
-                cameraObject.TryGetComponent(out CameraController cameraController);
-                if(cameraController != null)
-                    cameraController.Target = this;
-            }
-        }
-
-        // Remove rigidbody from client players
-        if(!NetworkManager.Singleton.IsServer)
-        {
-            Destroy(rb);
-            Destroy(boxCollider);
-        }
+        // Bind jump function to jump action
+        _inputMap.Player.Jump.performed += (InputAction.CallbackContext callback) => Jump();
     }
 
     private void Update()
     {
-        if(NetworkManager.Singleton.IsServer)
-        {
-            // Check if the player is grounded
-            Collider2D result = Physics2D.OverlapBox(transform.position, new Vector2(boxCollider.size.x * 0.95f, 0.1f), 0.0f, groundMask);
-            grounded = result != null;
-        }
-        
-        if(IsOwner)
-            moveDirection.Value = inputMap.Player.Move.ReadValue<float>();
+        // Check if the player is grounded
+        Collider2D result = Physics2D.OverlapBox(transform.position, new Vector2(_collider.size.x * 0.95f, 0.1f), 0.0f, _groundMask);
+        _grounded = result != null;
+
+        // Update the player's horizontal velocity
+        var moveDirection = _inputMap.Player.Move.ReadValue<float>();
+        _rigidbody.velocity = new Vector2(moveDirection * _moveSpeed, _rigidbody.velocity.y);
     } 
 
-    private void FixedUpdate()
-    {
-        if(NetworkManager.Singleton.IsServer)
-        {
-            // Update the player's horizontal velocity
-            rb.velocity = new Vector2(moveDirection.Value * moveSpeed, rb.velocity.y);
-        }
-    }
-
-    [ServerRpc]
-    public void SubmitJumpRequestServerRPC(ServerRpcParams rpcParams = default)
+    public void Jump()
     {
         // Set the player's vertical velocity
-        if(grounded)
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        if(_grounded)
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpSpeed);
     }
 }

@@ -12,6 +12,8 @@ public class PlayerGraphicsController : NetworkBehaviour
     [SerializeField] private Color ownerColor;
     [SerializeField] private Color otherColor;
 
+    private NetworkVariable<bool> _flip = new(false, writePerm: NetworkVariableWritePermission.Owner);
+
     private void Awake()
     {
         playerController = GetComponent<PlayerController2D>();
@@ -27,20 +29,16 @@ public class PlayerGraphicsController : NetworkBehaviour
     {
         markerRenderer.color = IsOwner ? ownerColor : otherColor;
 
-        if (IsServer)
+        if (IsOwner)
         {
             animator.SetBool("moving", playerController.Moving);
             animator.SetBool("grounded", playerController.Grounded);
             bool flip = playerRenderer.flipX;
-            if (playerController.VelocityX < -0.1f && !flip) flip = true;
-            else if (playerController.VelocityX > 0.1f && flip) flip = false;
-            SetPlayerFacingClientRpc(flip);
+            if (playerController.MoveDirection < -0.1f && !flip) flip = true;
+            else if (playerController.MoveDirection > 0.1f && flip) flip = false;
+            _flip.Value = flip;
         }
-    }
 
-    [ClientRpc]
-    private void SetPlayerFacingClientRpc(bool flip)
-    {
-        playerRenderer.flipX = flip;
+        playerRenderer.flipX = _flip.Value;
     }
 }
