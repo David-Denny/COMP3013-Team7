@@ -10,8 +10,8 @@ namespace Database
 
     public class DatabaseHandler
     {
-        private const string projectId = "comp3018-team7";
-        private string databaseUrl = $"https://{projectId}-default-rtdb.europe-west1.firebasedatabase.app/";
+        private const string _projectId = "comp3018-team7";
+        private string _databaseUrl = $"https://{_projectId}-default-rtdb.europe-west1.firebasedatabase.app/";
 
         public delegate void PostScoreCallback();
         public delegate void GetUserScoresCallback(List<string> results);
@@ -30,7 +30,7 @@ namespace Database
          */
         public DatabaseHandler(string url)
         {         
-            databaseUrl = url;
+            _databaseUrl = url;
         }
 
         /**
@@ -38,7 +38,7 @@ namespace Database
          */
         public void postScore(string username, int score, PostScoreCallback callback)
         {
-            RestClient.Post<Score>($"{databaseUrl}scores/{username}.json", new Score(score.ToString())).Then(response => { callback(); });
+            RestClient.Post<Score>($"{_databaseUrl}scores/{username}.json", new Score(score.ToString())).Then(response => { callback(); });
         }
 
         /**
@@ -46,7 +46,7 @@ namespace Database
          */
         public void getUserScores(string username, GetUserScoresCallback callback)
         {
-            RestClient.Get($"{databaseUrl}scores/{username}.json").Then(response =>
+            RestClient.Get($"{_databaseUrl}scores/{username}.json").Then(response =>
             {
                 var jsonObj = JObject.Parse(response.Text);
                 List<string> scores = new List<string>();
@@ -73,7 +73,7 @@ namespace Database
 
             UsersAndScores usersAndScores = new UsersAndScores();
 
-            RestClient.Get($"{databaseUrl}scores.json").Then(response =>
+            RestClient.Get($"{_databaseUrl}scores.json").Then(response =>
             {
                 var jsonObj = JObject.Parse(response.Text);
 
@@ -99,7 +99,7 @@ namespace Database
         */
         public void deleteUserScores(string username, DeleteUserScoresCallback callback)
         {
-            RestClient.Delete($"{databaseUrl}/scores/{username}.json").Then(response =>
+            RestClient.Delete($"{_databaseUrl}/scores/{username}.json").Then(response =>
             {
                 Debug.Log($"Status of deleting '{username}' scores: {response.StatusCode.ToString()}");
                 callback();

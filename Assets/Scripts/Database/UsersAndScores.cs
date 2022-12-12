@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class UsersAndScores
 {
-    public Dictionary<string, List<Score>> dict = new Dictionary<string, List<Score>>();
+    public Dictionary<string, List<Score>> _dict = new Dictionary<string, List<Score>>();
     public UsersAndScores()
     {
     }
 
     public void add(string username, Score score)
     {
-        if (dict.ContainsKey(username))
+        if (_dict.ContainsKey(username))
         {
-            List<Score> list = dict[username];
+            List<Score> list = _dict[username];
 
             if (!list.Contains(score))
             {
@@ -24,15 +24,15 @@ public class UsersAndScores
         {
          
             List<Score> list = new List<Score> { score };
-            dict.Add(username, list);
+            _dict.Add(username, list);
         }
     }
 
     public List<Score> getUserScores(string username)
     {
-        if (dict.ContainsKey(username))
+        if (_dict.ContainsKey(username))
         {
-            List<Score> list = dict[username];
+            List<Score> list = _dict[username];
             return list;
         }
         return null;

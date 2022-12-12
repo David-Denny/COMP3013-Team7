@@ -78,7 +78,7 @@ public class TestDatabaseHandler : MonoBehaviour
                     {
 
                         Debug.Log("Got all scores");
-                        foreach (var resultUsername in results.dict.Keys)
+                        foreach (var resultUsername in results._dict.Keys)
                         {
                             if (resultUsername == username)
                             {
@@ -161,13 +161,13 @@ public class TestDatabaseHandler : MonoBehaviour
                         {
                             db.getAllScores(results =>
                             {
-                                foreach (var username in results.dict.Keys)
+                                foreach (var username in results._dict.Keys)
                                 {
 
                                     Debug.Log($"Username '{username}' has scores:");
                                     foreach (Score score in results.getUserScores(username))
                                     {
-                                        Debug.Log($"Score - {score.score}");
+                                        Debug.Log($"Score - {score._score}");
                                     }
                                 }
 
