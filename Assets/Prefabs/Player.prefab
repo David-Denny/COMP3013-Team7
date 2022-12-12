@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1800552263972095475}
   - component: {fileID: 3501688502421687212}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9145591097272074098}
   - component: {fileID: 9145591097272074097}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 1442827536820973138}
   - component: {fileID: -7621084853099772242}
   - component: {fileID: -3358285438766090103}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

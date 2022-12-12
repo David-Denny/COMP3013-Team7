@@ -5,8 +5,8 @@ using Unity.Netcode;
 
 public class Laser : NetworkBehaviour
 {
-    [SerializeField] private Vector3 _startPosition;
-    [SerializeField] private Vector3 _endPosition;
+    [SerializeField] private float _startPosition;
+    [SerializeField] private float _endPosition;
     [SerializeField] private float _time;
 
     private bool _timing = false;
@@ -23,7 +23,10 @@ public class Laser : NetworkBehaviour
         {
             _currentTime += Time.deltaTime;
             float t = _currentTime / _time;
-            transform.position = Vector3.Lerp(_startPosition, _endPosition, t);
+
+            var position = transform.position;
+            position.x = Mathf.Lerp(_startPosition, _endPosition, t);
+            transform.position = position;
         }
     }
 
@@ -31,8 +34,12 @@ public class Laser : NetworkBehaviour
     {
         Gizmos.color = Color.yellow;
 
-        Gizmos.DrawWireSphere(_startPosition, 0.5f);
-        Gizmos.DrawLine(_startPosition, _endPosition);
-        Gizmos.DrawWireSphere(_endPosition, 0.5f);
+        var start = transform.position;
+        start.x = _startPosition;
+        var end = transform.position;
+        end.x = _endPosition;
+        Gizmos.DrawWireSphere(start, 0.5f);
+        Gizmos.DrawLine(start, end);
+        Gizmos.DrawWireSphere(end, 0.5f);
     }
 }
