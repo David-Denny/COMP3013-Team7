@@ -33,7 +33,7 @@ public class UsersAndScores
 
     public List<Tuple<string, string>> getAllScores()
     {
-        return _allUsersAndScores.OrderBy(i => i.Item2).ToList();
+        return _allUsersAndScores;
     }
 
     public List<Tuple<string, string>> getAllScoresOrdered()
