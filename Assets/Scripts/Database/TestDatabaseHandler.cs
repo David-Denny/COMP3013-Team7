@@ -8,6 +8,7 @@ using static System.Net.WebRequestMethods;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Assertions;
 using System.Runtime.Serialization.Json;
+using System;
 
 public class TestDatabaseHandler : MonoBehaviour
 {
@@ -22,10 +23,10 @@ public class TestDatabaseHandler : MonoBehaviour
         db.deleteAtUrl(databaseUrl, () =>
         {
             // uncomment one test at a time and run
-            testUploadScore();
-            //testDeleteScore();
+            //testUploadScore();
+            //testDeleteScore();6
             //testGetUserScores();
-            //testGetAllScores();
+            testGetAllScores();
         });
     }
 
@@ -78,9 +79,9 @@ public class TestDatabaseHandler : MonoBehaviour
                     {
 
                         Debug.Log("Got all scores");
-                        foreach (var resultUsername in results.dict.Keys)
+                        foreach (var resultUsername in results.getUserScores(username))
                         {
-                            if (resultUsername == username)
+                            if (resultUsername.Item1 == username)
                             {
                                 userExists = true;
                             }
@@ -161,14 +162,13 @@ public class TestDatabaseHandler : MonoBehaviour
                         {
                             db.getAllScores(results =>
                             {
-                                foreach (var username in results.dict.Keys)
+                                List<Tuple<string, string>> allScores = results.getAllScores();
+
+
+                                foreach (var userScore in allScores)
                                 {
 
-                                    Debug.Log($"Username '{username}' has scores:");
-                                    foreach (Score score in results.getUserScores(username))
-                                    {
-                                        Debug.Log($"Score - {score.score}");
-                                    }
+                                    Debug.Log("user " + userScore.Item1 + " has score " + userScore.Item2);
                                 }
 
                             });
