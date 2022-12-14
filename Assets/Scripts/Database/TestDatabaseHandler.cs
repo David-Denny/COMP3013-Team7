@@ -16,7 +16,7 @@ public class TestDatabaseHandler : MonoBehaviour
     private static void OnAppStart()
     {
         // Remove to run tests
-        return;
+        //return;
         string databaseUrl = "https://comp3018-team7-default-rtdb.europe-west1.firebasedatabase.app/testing/";
         DatabaseHandler db = new DatabaseHandler(databaseUrl);
 
@@ -26,7 +26,8 @@ public class TestDatabaseHandler : MonoBehaviour
             //testUploadScore();
             //testDeleteScore();6
             //testGetUserScores();
-            testGetAllScores();
+            //testGetAllScores();
+            testGetAllScoresOrdered();
         });
     }
 
@@ -171,6 +172,63 @@ public class TestDatabaseHandler : MonoBehaviour
                                     Debug.Log("user " + userScore.Item1 + " has score " + userScore.Item2);
                                 }
 
+                            });
+                        });
+                    });
+                }
+                else
+                {
+                    Debug.Log($"Uploading score - {score}");
+                    db.postScore(username1, score, null);
+                    db.postScore(username2, score, null);
+                }
+
+                count++;
+            }
+        });
+    }
+
+
+    public static void testGetAllScoresOrdered()
+    {
+        // Testing all user scores will be properly returned
+        string databaseUrl = "https://comp3018-team7-default-rtdb.europe-west1.firebasedatabase.app/testing/";
+        DatabaseHandler db = new DatabaseHandler(databaseUrl);
+
+        string username1 = "user-test-3";
+        string username2 = "user-test-4";
+        int[] scores = { 1, 2, 3, 4 };
+        int count = 0;
+
+        db.deleteAtUrl(databaseUrl, () =>
+        {
+            foreach (int score in scores)
+            {
+                if (count == scores.Length - 1)
+                {
+                    Debug.Log($"Uploading score - {score} ");
+                    db.postScore(username1, score, () => {
+                        db.postScore(username2, score, () =>
+                        {
+                            db.getAllScores(results =>
+                            {
+                                List<Tuple<string, string>> allScores = results.getAllScoresOrdered();
+
+                                string prevScore = "5";
+
+                                foreach (var userScore in allScores)
+                                {
+
+                                    // String.Compare returns -1 if prevScore < userScore.Item2
+                                    if (string.Compare(prevScore, userScore.Item2) == -1) {
+                                        Debug.Log("TEST FAILED - Previous score of " + prevScore + "is less than than " + userScore.Item2);
+                                        return;
+                                    }
+                                    Debug.Log("user " + userScore.Item1 + " has score " + userScore.Item2);
+                                    prevScore = userScore.Item2;
+                                }
+
+                                Debug.Log("TEST PASSED - results are ordered correctly");
                             });
                         });
                     });
