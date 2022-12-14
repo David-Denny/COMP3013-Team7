@@ -16,7 +16,7 @@ public class TestDatabaseHandler : MonoBehaviour
     private static void OnAppStart()
     {
         // Remove to run tests
-        //return;
+        return;
         string databaseUrl = "https://comp3018-team7-default-rtdb.europe-west1.firebasedatabase.app/testing/";
         DatabaseHandler db = new DatabaseHandler(databaseUrl);
 
