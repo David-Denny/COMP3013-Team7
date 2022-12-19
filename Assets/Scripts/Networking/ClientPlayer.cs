@@ -22,7 +22,8 @@ public class ClientPlayer : NetworkBehaviour
         base.OnNetworkSpawn();
 
         enabled = IsClient;
-        if(!IsOwner)
+        LevelManager.Instance.RegisterPlayer(_playerController);
+        if (!IsOwner)
         {
             enabled = false;
             _playerController.enabled = false;
