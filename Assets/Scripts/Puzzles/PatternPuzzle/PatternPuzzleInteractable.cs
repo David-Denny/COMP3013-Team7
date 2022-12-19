@@ -10,18 +10,23 @@ public class PatternPuzzleInteractable : NetworkBehaviour, IInteractable
     [SerializeField] private PatternPuzzle _patternPuzzle;
     [SerializeField] private Animator _switchAnimator;
 
-    private int _pattern = 0;
+    private NetworkVariable<int> _pattern = new();
+
+    public override void OnNetworkSpawn()
+    {
+        _screen.sprite = _patterns[_pattern.Value];
+    }
 
     [ClientRpc]
     public void SetPatternClientRpc(int pattern)
     {
-        _pattern = pattern;
+        _pattern.Value = pattern;
         _screen.sprite = _patterns[pattern];
     }
 
     public void Interact()
     {
-        _patternPuzzle.AttemptMatchServerRpc(_pattern);
+        _patternPuzzle.AttemptMatchServerRpc(_pattern.Value);
         _switchAnimator.SetTrigger("flip");
     }
 }

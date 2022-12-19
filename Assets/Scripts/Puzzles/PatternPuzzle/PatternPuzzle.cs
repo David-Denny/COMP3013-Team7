@@ -22,7 +22,7 @@ public class PatternPuzzle : NetworkBehaviour
     [SerializeField] private Transform _lowerBarrier;
     [SerializeField] private PatternPuzzleInteractable[] _interactables;
 
-    private int _currentPattern = 0;
+    private NetworkVariable<int> _currentPattern = new();
     private int _currentMatches = 0;
     private bool _finished = false;
     private float _barrierTimer = 0.0f;
@@ -39,10 +39,13 @@ public class PatternPuzzle : NetworkBehaviour
             List<int> patterns = Enumerable.Range(0, _patterns.Length).ToList();
             var shuffledPatterns = patterns.OrderBy(item => rnd.Next()).ToList();
             for(int i = 0; i < _interactables.Length; ++i)
-                _interactables[i].SetPatternClientRpc(patterns[i]);
+                _interactables[i].SetPatternClientRpc(shuffledPatterns[i]);
             
-            ShowNewPattern();
+            ShowNewPatternServerRpc();
         }
+
+        _targetScreen.sprite = _patterns[_currentPattern.Value];
+        _currentPattern.OnValueChanged += (prev, curr) => { _targetScreen.sprite = _patterns[curr]; };
     }
 
     private void Update()
@@ -63,13 +66,13 @@ public class PatternPuzzle : NetworkBehaviour
             return;
 
         // If matched correctly
-        if (pattern == _currentPattern)
+        if (pattern == _currentPattern.Value)
         {
             ++_currentMatches;
             if (_currentMatches == _sequenceLength)
-                OnPatternSuccess();
+                OnPatternSuccessClientRpc();
             else
-                ShowNewPattern();
+                ShowNewPatternServerRpc();
         }
         else
         {
@@ -78,19 +81,18 @@ public class PatternPuzzle : NetworkBehaviour
         }
     }
 
-    private void ShowNewPattern()
+    [ServerRpc]
+    private void ShowNewPatternServerRpc()
     {
-        _currentPattern = UnityEngine.Random.Range(0, _patterns.Length);
-        UpdateTargetClientRpc(_currentPattern);
+        int newPattern = UnityEngine.Random.Range(0, _patterns.Length);
+        while (newPattern == _currentPattern.Value)
+            newPattern = UnityEngine.Random.Range(0, _patterns.Length);
+
+        _currentPattern.Value = newPattern;
     }
 
     [ClientRpc]
-    private void UpdateTargetClientRpc(int pattern)
-    {
-        _targetScreen.sprite = _patterns[pattern];
-    }
-
-    private void OnPatternSuccess()
+    private void OnPatternSuccessClientRpc()
     {
         _targetScreen.sprite = null;
         _finished = true;
