@@ -10,11 +10,17 @@ public class UsersAndScores
     {
     }
 
+    /**
+     * Adds a tuple of the (username, score) to the list of all users/scores
+     */
     public void add(string username, Score score)
     {
         _allUsersAndScores.Add(new Tuple<string, string>(username, score.score));
     }
 
+    /**
+     * Returns a list of all the scores assigned to the input username
+     */
     public List<Tuple<string, string>> getUserScores(string username)
     {
 
@@ -31,11 +37,17 @@ public class UsersAndScores
         return userScores;
     }
 
+    /**
+     * Returns the list of all users and their scores
+     */
     public List<Tuple<string, string>> getAllScores()
     {
         return _allUsersAndScores;
     }
 
+    /**
+     * Returns the list of all users and their scores in descending order of score
+     */
     public List<Tuple<string, string>> getAllScoresOrdered()
     {
         return _allUsersAndScores.OrderByDescending(i => i.Item2).ToList();
