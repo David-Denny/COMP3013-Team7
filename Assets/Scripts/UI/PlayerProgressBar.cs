@@ -35,11 +35,14 @@ public class PlayerProgressBar : MonoBehaviour
         float maxT = 0f;
         for (int i = 0; i < players.Count; ++i)
         {
-            float t = players[i].transform.position.x / finish;
-            maxT = Mathf.Max(maxT, t);
+            if (players[i] != null)
+            {
+                float t = players[i].transform.position.x / finish;
+                maxT = Mathf.Max(maxT, t);
 
-            float markerX = Mathf.Lerp(_markerPadding, _transform.sizeDelta.x - _markerPadding, t);
-            _playerMarkers[i].anchoredPosition = new Vector2(markerX, _playerMarkers[i].anchoredPosition.y);
+                float markerX = Mathf.Lerp(_markerPadding, _transform.sizeDelta.x - _markerPadding, t);
+                _playerMarkers[i].anchoredPosition = new Vector2(markerX, _playerMarkers[i].anchoredPosition.y);
+            }
         }
 
         float barWidth = Mathf.Lerp(_transform.sizeDelta.x, 0f, maxT);
