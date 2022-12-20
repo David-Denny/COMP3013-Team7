@@ -4,6 +4,9 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Class <c>PlayerTouch</c> invokes an event on the server when a player touches this object.
+/// </summary>
 public class PlayerTouch : NetworkBehaviour
 {
     [SerializeField] private UnityEvent<GameObject> _onPlayerTouch;
