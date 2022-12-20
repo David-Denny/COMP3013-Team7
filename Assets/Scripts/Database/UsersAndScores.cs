@@ -1,40 +1,44 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UsersAndScores
 {
-    public Dictionary<string, List<Score>> dict = new Dictionary<string, List<Score>>();
+    private List<Tuple<string, string>> _allUsersAndScores = new List<Tuple<string, string>>();
     public UsersAndScores()
     {
     }
 
     public void add(string username, Score score)
     {
-        if (dict.ContainsKey(username))
-        {
-            List<Score> list = dict[username];
+        _allUsersAndScores.Add(new Tuple<string, string>(username, score.score));
+    }
 
-            if (!list.Contains(score))
+    public List<Tuple<string, string>> getUserScores(string username)
+    {
+
+        List<Tuple<string, string>> userScores = new List<Tuple<string, string>>();
+
+        foreach (var userScore in _allUsersAndScores)
+        {
+            if (userScore.Item1 == username)
             {
-                list.Add(score);
+                userScores.Add(userScore);
             }
         }
-        else
-        {
-         
-            List<Score> list = new List<Score> { score };
-            dict.Add(username, list);
-        }
+
+        return userScores;
     }
 
-    public List<Score> getUserScores(string username)
+    public List<Tuple<string, string>> getAllScores()
     {
-        if (dict.ContainsKey(username))
-        {
-            List<Score> list = dict[username];
-            return list;
-        }
-        return null;
+        return _allUsersAndScores;
     }
+
+    public List<Tuple<string, string>> getAllScoresOrdered()
+    {
+        return _allUsersAndScores.OrderByDescending(i => i.Item2).ToList();
+    }
+
 }

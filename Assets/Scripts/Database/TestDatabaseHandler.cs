@@ -8,6 +8,7 @@ using static System.Net.WebRequestMethods;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Assertions;
 using System.Runtime.Serialization.Json;
+using System;
 
 public class TestDatabaseHandler : MonoBehaviour
 {
@@ -22,10 +23,11 @@ public class TestDatabaseHandler : MonoBehaviour
         db.deleteAtUrl(databaseUrl, () =>
         {
             // uncomment one test at a time and run
-            testUploadScore();
-            //testDeleteScore();
+            //testUploadScore();
+            //testDeleteScore();6
             //testGetUserScores();
             //testGetAllScores();
+            testGetAllScoresOrdered();
         });
     }
 
@@ -78,9 +80,9 @@ public class TestDatabaseHandler : MonoBehaviour
                     {
 
                         Debug.Log("Got all scores");
-                        foreach (var resultUsername in results.dict.Keys)
+                        foreach (var resultUsername in results.getUserScores(username))
                         {
-                            if (resultUsername == username)
+                            if (resultUsername.Item1 == username)
                             {
                                 userExists = true;
                             }
@@ -161,16 +163,72 @@ public class TestDatabaseHandler : MonoBehaviour
                         {
                             db.getAllScores(results =>
                             {
-                                foreach (var username in results.dict.Keys)
+                                List<Tuple<string, string>> allScores = results.getAllScores();
+
+
+                                foreach (var userScore in allScores)
                                 {
 
-                                    Debug.Log($"Username '{username}' has scores:");
-                                    foreach (Score score in results.getUserScores(username))
-                                    {
-                                        Debug.Log($"Score - {score.score}");
-                                    }
+                                    Debug.Log("user " + userScore.Item1 + " has score " + userScore.Item2);
                                 }
 
+                            });
+                        });
+                    });
+                }
+                else
+                {
+                    Debug.Log($"Uploading score - {score}");
+                    db.postScore(username1, score, null);
+                    db.postScore(username2, score, null);
+                }
+
+                count++;
+            }
+        });
+    }
+
+
+    public static void testGetAllScoresOrdered()
+    {
+        // Testing all user scores will be properly returned
+        string databaseUrl = "https://comp3018-team7-default-rtdb.europe-west1.firebasedatabase.app/testing/";
+        DatabaseHandler db = new DatabaseHandler(databaseUrl);
+
+        string username1 = "user-test-3";
+        string username2 = "user-test-4";
+        int[] scores = { 1, 2, 3, 4 };
+        int count = 0;
+
+        db.deleteAtUrl(databaseUrl, () =>
+        {
+            foreach (int score in scores)
+            {
+                if (count == scores.Length - 1)
+                {
+                    Debug.Log($"Uploading score - {score} ");
+                    db.postScore(username1, score, () => {
+                        db.postScore(username2, score, () =>
+                        {
+                            db.getAllScores(results =>
+                            {
+                                List<Tuple<string, string>> allScores = results.getAllScoresOrdered();
+
+                                string prevScore = "5";
+
+                                foreach (var userScore in allScores)
+                                {
+
+                                    // String.Compare returns -1 if prevScore < userScore.Item2
+                                    if (string.Compare(prevScore, userScore.Item2) == -1) {
+                                        Debug.Log("TEST FAILED - Previous score of " + prevScore + "is less than than " + userScore.Item2);
+                                        return;
+                                    }
+                                    Debug.Log("user " + userScore.Item1 + " has score " + userScore.Item2);
+                                    prevScore = userScore.Item2;
+                                }
+
+                                Debug.Log("TEST PASSED - results are ordered correctly");
                             });
                         });
                     });
