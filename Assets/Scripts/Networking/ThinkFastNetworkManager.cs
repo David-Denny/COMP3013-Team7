@@ -28,7 +28,7 @@ public class ThinkFastNetworkManager : MonoBehaviour
     public void SetIP(string ip) 
     {
         _transport.ConnectionData.Address = ip;
-        _transport.ConnectionData.Port = 7777;
+        _transport.ConnectionData.Port = 25566;
     }
 
     private void ShowError(string message)
