@@ -4,16 +4,16 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/// <summary>
+/// Client side manager for the player
+/// </summary>
 public class ClientPlayer : NetworkBehaviour
 {
     private PlayerController2D _playerController;
-    private BoxCollider2D _collider;
 
     private void Awake()
     {
         _playerController = GetComponent<PlayerController2D>();
-        _collider = GetComponent<BoxCollider2D>();
-
         _playerController.enabled = false;
     }
 
@@ -22,7 +22,11 @@ public class ClientPlayer : NetworkBehaviour
         base.OnNetworkSpawn();
 
         enabled = IsClient;
+
+        // Register local player
         LevelManager.Instance.RegisterPlayer(_playerController);
+
+        // Disable player controller if we are not the owner
         if (!IsOwner)
         {
             enabled = false;
@@ -30,6 +34,7 @@ public class ClientPlayer : NetworkBehaviour
             return;
         }
 
+        // Enable controller as we are the owner
         _playerController.enabled = true;
 
         // Set camera to target player
@@ -42,6 +47,11 @@ public class ClientPlayer : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Client RPC to set the starting position of this player
+    /// </summary>
+    /// <param name="position">Spawn location</param>
+    /// <param name="clientRpcParams">Additional parameters</param>
     [ClientRpc]
     public void SetSpawnClientRpc(Vector3 position, ClientRpcParams clientRpcParams = default)
     {

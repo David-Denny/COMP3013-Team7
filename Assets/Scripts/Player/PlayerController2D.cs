@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController2D : NetworkBehaviour
+/// <summary>
+/// Class for controlling the player's movement
+/// </summary>
+public class PlayerController2D : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpSpeed;
@@ -17,12 +19,22 @@ public class PlayerController2D : NetworkBehaviour
 
     private bool _grounded = false;
 
+    /// <summary>
+    /// Is the player moving horizontally
+    /// </summary>
     public bool Moving {  get { return _rigidbody.velocity.x != 0.0f; } }
+    /// <summary>
+    /// Is the player on the ground
+    /// </summary>
     public bool Grounded { get { return _grounded; } }
+    /// <summary>
+    /// The horizontal direction of the player
+    /// </summary>
     public float MoveDirection { get { return _rigidbody.velocity.x; } }
 
     private void Awake()
     {
+        // Get required components
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();
     }
@@ -48,7 +60,10 @@ public class PlayerController2D : NetworkBehaviour
         _rigidbody.velocity = new Vector2(moveDirection * _moveSpeed, _rigidbody.velocity.y);
     } 
 
-    public void Jump()
+    /// <summary>
+    /// Initiate a jump
+    /// </summary>
+    private void Jump()
     {
         // Set the player's vertical velocity
         if(_grounded)
