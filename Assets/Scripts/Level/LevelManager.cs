@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
@@ -38,6 +39,11 @@ public class LevelManager : MonoBehaviour
             _instance  = this;
         else
             Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        
     }
 
     /// <summary>

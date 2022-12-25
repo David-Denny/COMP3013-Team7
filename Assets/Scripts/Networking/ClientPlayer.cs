@@ -19,17 +19,14 @@ public class ClientPlayer : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
-
         enabled = IsClient;
 
         // Register local player
-        LevelManager.Instance.RegisterPlayer(_playerController);
+        //LevelManager.Instance.RegisterPlayer(_playerController);
 
         // Disable player controller if we are not the owner
         if (!IsOwner)
         {
-            enabled = false;
             _playerController.enabled = false;
             return;
         }
