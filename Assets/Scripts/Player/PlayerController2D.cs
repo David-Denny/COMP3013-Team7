@@ -49,6 +49,11 @@ public class PlayerController2D : MonoBehaviour
         _inputMap.Player.Jump.performed += (InputAction.CallbackContext callback) => Jump();
     }
 
+    private void OnDisable()
+    {
+        _inputMap?.Disable();
+    }
+
     private void Update()
     {
         // Check if the player is grounded
