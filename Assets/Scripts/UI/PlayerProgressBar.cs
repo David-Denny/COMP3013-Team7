@@ -29,6 +29,9 @@ public class PlayerProgressBar : MonoBehaviour
             _playerMarkers.Add(playerMarker.GetComponent<RectTransform>());
         }
 
+        if (LevelManager.Instance.Finish == null)
+            return;
+
         // Update marker positions
         float finish = LevelManager.Instance.Finish.position.x;
 

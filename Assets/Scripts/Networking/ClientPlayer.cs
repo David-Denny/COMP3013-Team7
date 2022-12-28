@@ -40,7 +40,6 @@ public class ClientPlayer : NetworkBehaviour
         if (cameraObject != null)
         {
             cameraObject.TryGetComponent(out CameraController cameraController);
-            Debug.Log(cameraObject.name);
             if (cameraController != null)
                 cameraController.Target = _playerController;
         }
