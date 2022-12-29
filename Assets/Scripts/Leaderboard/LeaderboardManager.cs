@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
-using Text = UnityEngine.UI.Text;
 
 public class LeaderboardManager : MonoBehaviour
 {

@@ -4,6 +4,9 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Class to manage the game over menu
+/// </summary>
 public class GameOverMenu : NetworkBehaviour
 {
     [SerializeField] private GameObject _menuPage;
@@ -12,24 +15,35 @@ public class GameOverMenu : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        // Only show buttons on host
         _menuButton.SetActive(IsHost);
         _restartButton.SetActive(IsHost);
 
+        // Hide page on start
         _menuPage.SetActive(false);
     }
 
+    /// <summary>
+    /// Show the game over page on each client
+    /// </summary>
     [ClientRpc]
     public void ShowClientRpc()
     {
         _menuPage.SetActive(true);
     }
 
+    /// <summary>
+    /// Restart the level
+    /// </summary>
     [ServerRpc]
     public void RestartServerRpc()
     {
         NetworkManager.SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
     }
 
+    /// <summary>
+    /// Return all clients to the main menu
+    /// </summary>
     [ServerRpc]
     public void MainMenuServerRpc()
     {
@@ -44,18 +58,25 @@ public class GameOverMenu : NetworkBehaviour
     {
         if(IsServer)
         {
+            // End connection
             NetworkManager.Shutdown();
             Destroy(NetworkManager.Singleton.gameObject);
+            // Load main menu
             SceneManager.LoadScene("MainMenuScene");
         }
     }
 
+    /// <summary>
+    /// Disconnect all clients
+    /// </summary>
     [ClientRpc]
     private void DisconnectClientsClientRpc()
     {
         if(!IsServer)
         {
+            // Disconnect client
             NetworkManager.Shutdown();
+            // Load main menu
             SceneManager.LoadScene("MainMenuScene");
         }
     }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class to display player progress on the UI
+/// </summary>
 public class PlayerProgressBar : MonoBehaviour
 {
     [SerializeField] private float _markerPadding = 2f;
@@ -19,6 +22,7 @@ public class PlayerProgressBar : MonoBehaviour
 
     private void Update()
     {
+        // Get list of players
         List<PlayerController2D> players = LevelManager.Instance.Players;
 
         // Create marker foreach player
