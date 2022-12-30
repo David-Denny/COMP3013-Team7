@@ -29,6 +29,12 @@ public class PlayerInteract : NetworkBehaviour
         }
     }
 
+    public override void OnNetworkDespawn()
+    {
+        if(IsOwner)
+            inputMap.Disable();
+    }
+
     /// <summary>
     /// Try to find an interactable in range, interact with it if there is
     /// </summary>

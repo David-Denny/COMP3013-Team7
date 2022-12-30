@@ -19,17 +19,15 @@ public class ClientPlayer : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
-
         enabled = IsClient;
 
         // Register local player
-        LevelManager.Instance.RegisterPlayer(_playerController);
+        if(LevelManager.Instance != null)
+            LevelManager.Instance.RegisterPlayer(_playerController);
 
         // Disable player controller if we are not the owner
         if (!IsOwner)
         {
-            enabled = false;
             _playerController.enabled = false;
             return;
         }
@@ -45,16 +43,5 @@ public class ClientPlayer : NetworkBehaviour
             if (cameraController != null)
                 cameraController.Target = _playerController;
         }
-    }
-
-    /// <summary>
-    /// Client RPC to set the starting position of this player
-    /// </summary>
-    /// <param name="position">Spawn location</param>
-    /// <param name="clientRpcParams">Additional parameters</param>
-    [ClientRpc]
-    public void SetSpawnClientRpc(Vector3 position, ClientRpcParams clientRpcParams = default)
-    {
-        transform.position = position;
     }
 }
