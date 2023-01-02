@@ -446,6 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acbdd9a8141bbe54599305f1b4df6e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _completionScore: 50
   _sequenceLength: 1
   _patterns:
   - {fileID: -1070323720, guid: 893c047363c33db4c9666cb5c9b98fd7, type: 3}

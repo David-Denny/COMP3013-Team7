@@ -4,6 +4,9 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class for managing the game score
+/// </summary>
 public class ScoreManager : NetworkBehaviour
 {
     private static ScoreManager _instance;
@@ -19,6 +22,7 @@ public class ScoreManager : NetworkBehaviour
 
     private void Awake()
     {
+        // Setup singleton instance
         if (_instance == null)
             _instance = this;
         else
@@ -27,6 +31,7 @@ public class ScoreManager : NetworkBehaviour
 
     private void Start()
     {
+        // Setup text to update when score changes
         if (IsClient)
             _score.OnValueChanged += (prev, curr) => _scoreText.text = curr.ToString();
     }
@@ -35,29 +40,42 @@ public class ScoreManager : NetworkBehaviour
     {
         if(!IsServer) return;
 
+        // Calculate the distance based score
         float finish = LevelManager.Instance.Finish.transform.position.x;
         foreach (var player in LevelManager.Instance.Players)
         {
             if (player != null)
             {
+                // Calculate current distance of the player
                 float t = player.transform.position.x / finish;
+                // Update max distance reached
                 _maxT = Mathf.Max(_maxT, t);
             }
         }
+        // Recalculate total score
         RecalculateScoreServerRpc();
     }
 
+    /// <summary>
+    /// Add puzzle based score to the current score
+    /// </summary>
+    /// <param name="score">Amount of score to add</param>
     [ServerRpc]
     public void AddScoreServerRpc(int score)
     {
+        // Increase current puzzle score
         _puzzleScore += score;
+        // Recalculate total score
         RecalculateScoreServerRpc();
     }
 
+    /// <summary>
+    /// Recalculates the total score
+    /// </summary>
     [ServerRpc]
     private void RecalculateScoreServerRpc()
     {
-        int newScore = _puzzleScore + (int)(_distanceScoreWorth * _maxT);
+        int newScore = _puzzleScore + Mathf.CeilToInt(_distanceScoreWorth * _maxT);
         if(newScore != _score.Value)
             _score.Value = newScore;
     }
