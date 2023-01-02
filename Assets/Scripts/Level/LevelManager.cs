@@ -1,3 +1,4 @@
+using Database;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -62,6 +63,11 @@ public class LevelManager : MonoBehaviour
         // Add score if all players reached the finish
         if(finished)
             ScoreManager.Instance.AddScoreServerRpc(_finishScore);
+
+        // Upload score to database
+        DatabaseHandler db = new();
+        db.postScore("Player", ScoreManager.Instance.Score, () => Debug.Log("Score uploaded to database"));
+
         _gameOverMenu.ShowClientRpc();
     }
 }
