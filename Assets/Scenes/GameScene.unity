@@ -1664,6 +1664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4218e9e09ca0b5045a53ce8ff38aac62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _finishScore: 500
   _laser: {fileID: 1160565007}
   _finish: {fileID: 1377708727}
   _gameOverMenu: {fileID: 1480910791}
@@ -1711,6 +1712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuPage: {fileID: 1916760775}
+  _scoreText: {fileID: 1294217358}
   _menuButton: {fileID: 1397812742}
   _restartButton: {fileID: 1854738660}
 --- !u!114 &1480910792
@@ -1725,7 +1727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c46a93798077894d9f2ad149429854f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceScoreWorth: 100
+  _distanceScoreWorth: 1000
   _scoreText: {fileID: 130861470}
 --- !u!1 &1705809850
 GameObject:

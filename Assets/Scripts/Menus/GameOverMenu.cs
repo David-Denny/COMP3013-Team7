@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Class to manage the game over menu
@@ -10,6 +11,7 @@ using UnityEngine.SceneManagement;
 public class GameOverMenu : NetworkBehaviour
 {
     [SerializeField] private GameObject _menuPage;
+    [SerializeField] private Text _scoreText;
     [SerializeField] private GameObject _menuButton;
     [SerializeField] private GameObject _restartButton;
 
@@ -29,6 +31,7 @@ public class GameOverMenu : NetworkBehaviour
     [ClientRpc]
     public void ShowClientRpc()
     {
+        _scoreText.text = "Score: " + ScoreManager.Instance.Score.ToString();
         _menuPage.SetActive(true);
     }
 

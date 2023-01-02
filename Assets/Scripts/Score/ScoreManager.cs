@@ -13,6 +13,8 @@ public class ScoreManager : NetworkBehaviour
 
     public static ScoreManager Instance { get { return _instance; } }
 
+    public int Score { get { return _score.Value; } }
+
     [SerializeField] private int _distanceScoreWorth;
     [SerializeField] private Text _scoreText;
 
