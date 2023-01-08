@@ -5,9 +5,6 @@ using Unity.Netcode;
 using UnityEngine.InputSystem;
 using System;
 
-/// <summary>
-/// Class for handling the player interacting with objects
-/// </summary>
 public class PlayerInteract : NetworkBehaviour
 {
     [SerializeField] private Vector2 interactionOffset;
@@ -29,15 +26,6 @@ public class PlayerInteract : NetworkBehaviour
         }
     }
 
-    public override void OnNetworkDespawn()
-    {
-        if(IsOwner)
-            inputMap.Disable();
-    }
-
-    /// <summary>
-    /// Try to find an interactable in range, interact with it if there is
-    /// </summary>
     [ServerRpc]
     private void TryInteractServerRPC()
     {
