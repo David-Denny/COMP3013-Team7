@@ -1,81 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController2D : NetworkBehaviour
+/// <summary>
+/// Class for controlling the player's movement
+/// </summary>
+public class PlayerController2D : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpSpeed;
-    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _jumpSpeed;
+    [SerializeField] private LayerMask _groundMask;
+    [SerializeField] private AudioClip _jumpAudio;
 
-    private InputMap inputMap;
-    private Rigidbody2D rb;
-    private BoxCollider2D boxCollider;
+    private InputMap _inputMap;
+    private Rigidbody2D _rigidbody;
+    private BoxCollider2D _collider;
 
-    private bool grounded = false;
+    private bool _grounded = false;
 
-    private NetworkVariable<float> moveDirection = new(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-
-    public bool Moving {  get { return rb.velocity.x != 0.0f; } }
-    public bool Grounded { get { return grounded; } }
-    public float VelocityX { get { return rb.velocity.x; } }
+    /// <summary>
+    /// Is the player moving horizontally
+    /// </summary>
+    public bool Moving {  get { return _rigidbody.velocity.x != 0.0f; } }
+    /// <summary>
+    /// Is the player on the ground
+    /// </summary>
+    public bool Grounded { get { return _grounded; } }
+    /// <summary>
+    /// The horizontal direction of the player
+    /// </summary>
+    public float MoveDirection { get { return _rigidbody.velocity.x; } }
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        boxCollider= GetComponent<BoxCollider2D>();
+        // Get required components
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<BoxCollider2D>();
     }
 
-    public override void OnNetworkSpawn()
+    private void Start()
     {
-        if(IsOwner)
-        {
-            // Create input map
-            inputMap = new InputMap();
-            inputMap.Enable();
+        // Create input map
+        _inputMap = new InputMap();
+        _inputMap.Enable();
 
-            // Bind jump function to jump action
-            inputMap.Player.Jump.performed += (InputAction.CallbackContext callback) => SubmitJumpRequestServerRPC();
-        }
+        // Bind jump function to jump action
+        _inputMap.Player.Jump.performed += (InputAction.CallbackContext callback) => Jump();
+    }
 
-        // Remove rigidbody from client players
-        if(!NetworkManager.Singleton.IsServer)
-        {
-            Destroy(rb);
-            Destroy(boxCollider);
-        }
+    private void OnDisable()
+    {
+        _inputMap?.Disable();
     }
 
     private void Update()
     {
-        if(NetworkManager.Singleton.IsServer)
-        {
-            // Check if the player is grounded
-            Collider2D result = Physics2D.OverlapBox(transform.position, new Vector2(boxCollider.size.x * 0.95f, 0.1f), 0.0f, groundMask);
-            grounded = result != null;
-        }
-        
-        if(IsOwner)
-            moveDirection.Value = inputMap.Player.Move.ReadValue<float>();
+        // Check if the player is grounded
+        Collider2D result = Physics2D.OverlapBox(transform.position, new Vector2(_collider.size.x * 0.95f, 0.1f), 0.0f, _groundMask);
+        _grounded = result != null;
+
+        // Update the player's horizontal velocity
+        var moveDirection = _inputMap.Player.Move.ReadValue<float>();
+        _rigidbody.velocity = new Vector2(moveDirection * _moveSpeed, _rigidbody.velocity.y);
     } 
 
-    private void FixedUpdate()
-    {
-        if(NetworkManager.Singleton.IsServer)
-        {
-            // Update the player's horizontal velocity
-            rb.velocity = new Vector2(moveDirection.Value * moveSpeed, rb.velocity.y);
-        }
-    }
-
-    [ServerRpc]
-    public void SubmitJumpRequestServerRPC(ServerRpcParams rpcParams = default)
+    /// <summary>
+    /// Initiate a jump
+    /// </summary>
+    private void Jump()
     {
         // Set the player's vertical velocity
-        if(grounded)
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        if (!_grounded) return;
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpSpeed);
+        GetComponent<AudioSource>().PlayOneShot(_jumpAudio);
     }
 }
