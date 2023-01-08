@@ -9,11 +9,11 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpSpeed;
     [SerializeField] private LayerMask _groundMask;
-    [SerializeField] private AudioClip _jumpAudio;
 
     private InputMap _inputMap;
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _collider;
+    private AudioSource _audioSource;
 
     private bool _grounded = false;
 
@@ -35,6 +35,7 @@ public class PlayerController2D : MonoBehaviour
         // Get required components
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -71,6 +72,6 @@ public class PlayerController2D : MonoBehaviour
         // Set the player's vertical velocity
         if (!_grounded) return;
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpSpeed);
-        GetComponent<AudioSource>().PlayOneShot(_jumpAudio);
+        _audioSource.Play();
     }
 }
