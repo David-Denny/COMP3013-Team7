@@ -9,7 +9,7 @@ using System.Linq;
 /// Class that controls a puzzle pattern.
 /// Displays a sequence of patterns the players have to enter.
 /// </summary>
-public class PatternPuzzle : NetworkBehaviour
+public class PatternPuzzle : Puzzle
 {
     [Header("Pattern")]
     [SerializeField] private int _sequenceLength;
@@ -88,7 +88,10 @@ public class PatternPuzzle : NetworkBehaviour
             ++_currentMatches;
             // Check if finished
             if (_currentMatches == _sequenceLength)
+            {
+                PuzzleCompletedServerRpc();
                 OnPatternSuccessClientRpc();
+            }
             else
                 ShowNewPatternServerRpc();
         }
