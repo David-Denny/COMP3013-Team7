@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +9,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpSpeed;
     [SerializeField] private LayerMask _groundMask;
+    [SerializeField] private AudioClip _jumpAudio;
 
     private InputMap _inputMap;
     private Rigidbody2D _rigidbody;
@@ -71,7 +69,8 @@ public class PlayerController2D : MonoBehaviour
     private void Jump()
     {
         // Set the player's vertical velocity
-        if(_grounded)
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpSpeed);
+        if (!_grounded) return;
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpSpeed);
+        GetComponent<AudioSource>().PlayOneShot(_jumpAudio);
     }
 }
