@@ -1,0 +1,5 @@
+@startuml
+class PlayerProgressBar {
+}
+MonoBehaviour <|-- PlayerProgressBar
+@enduml

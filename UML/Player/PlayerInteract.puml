@@ -1,0 +1,7 @@
+@startuml
+class PlayerInteract {
+    + <<override>> OnNetworkSpawn() : void
+    + <<override>> OnNetworkDespawn() : void
+}
+NetworkBehaviour <|-- PlayerInteract
+@enduml

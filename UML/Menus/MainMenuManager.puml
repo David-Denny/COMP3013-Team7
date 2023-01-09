@@ -1,0 +1,11 @@
+@startuml
+class MainMenuPage <<struct>> {
+    + pageName : string
+}
+class MainMenuManager {
+    + ShowPage(page:string) : void
+    + Quit() : void
+}
+MainMenuPage --> "page" GameObject
+MonoBehaviour <|-- MainMenuManager
+@enduml

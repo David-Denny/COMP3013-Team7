@@ -1,0 +1,9 @@
+@startuml
+class UsersAndScores {
+    + UsersAndScores()
+    + add(username:string, score:Score) : void
+    + getUserScores(username:string) : List<Tuple<string, string>>
+    + getAllScores() : List<Tuple<string, string>>
+    + getAllScoresOrdered() : List<Tuple<string, string>>
+}
+@enduml

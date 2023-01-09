@@ -1,0 +1,9 @@
+@startuml
+class GameOverMenu {
+    + <<override>> OnNetworkSpawn() : void
+    + ShowClientRpc() : void
+    + RestartServerRpc() : void
+    + MainMenuServerRpc() : void
+}
+NetworkBehaviour <|-- GameOverMenu
+@enduml

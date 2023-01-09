@@ -1,0 +1,7 @@
+@startuml
+class ClientEventInteractable {
+    + Interact() : void
+}
+NetworkBehaviour <|-- ClientEventInteractable
+IInteractable <|-- ClientEventInteractable
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class DatabaseHandler {
+    + DatabaseHandler()
+    + DatabaseHandler(url:string)
+    + postScore(username:string, score:int, callback:PostScoreCallback) : void
+    + getUserScores(username:string, callback:GetUserScoresCallback) : void
+    + getAllScores(callback:GetAllScoresCallback) : void
+    + deleteUserScores(username:string, callback:DeleteUserScoresCallback) : void
+    + deleteAtUrl(url:string, callback:DeleteAtUrlCallback) : void
+}
+class "List`1"<T> {
+}
+@enduml

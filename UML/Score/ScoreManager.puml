@@ -1,0 +1,8 @@
+@startuml
+class ScoreManager {
+    + Score : int <<get>>
+    + AddScoreServerRpc(score:int) : void
+}
+NetworkBehaviour <|-- ScoreManager
+ScoreManager --> "Instance" ScoreManager
+@enduml

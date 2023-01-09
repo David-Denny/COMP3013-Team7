@@ -1,0 +1,9 @@
+@startuml
+class PatternPuzzleInteractable {
+    + <<override>> OnNetworkSpawn() : void
+    + SetPatternServerRpc(pattern:int) : void
+    + Interact() : void
+}
+NetworkBehaviour <|-- PatternPuzzleInteractable
+IInteractable <|-- PatternPuzzleInteractable
+@enduml

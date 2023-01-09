@@ -1,0 +1,8 @@
+@startuml
+class PlayerController2D {
+    + Moving : bool <<get>>
+    + Grounded : bool <<get>>
+    + MoveDirection : float <<get>>
+}
+MonoBehaviour <|-- PlayerController2D
+@enduml

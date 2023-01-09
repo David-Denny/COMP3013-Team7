@@ -1,0 +1,6 @@
+@startuml
+class LeaderboardManager {
+    Start() : void
+}
+MonoBehaviour <|-- LeaderboardManager
+@enduml

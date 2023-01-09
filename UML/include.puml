@@ -1,0 +1,144 @@
+@startuml
+class DatabaseHandler {
+    + DatabaseHandler()
+    + DatabaseHandler(url:string)
+    + postScore(username:string, score:int, callback:PostScoreCallback) : void
+    + getUserScores(username:string, callback:GetUserScoresCallback) : void
+    + getAllScores(callback:GetAllScoresCallback) : void
+    + deleteUserScores(username:string, callback:DeleteUserScoresCallback) : void
+    + deleteAtUrl(url:string, callback:DeleteAtUrlCallback) : void
+}
+class "List`1"<T> {
+}
+class Score {
+    + score : string
+    + Score(score:string)
+}
+class TestDatabaseHandler {
+    + {static} testUploadScore() : void
+    + {static} testDeleteScore() : void
+    + {static} testGetUserScores() : void
+    + {static} testGetAllScores() : void
+    + {static} testGetAllScoresOrdered() : void
+}
+MonoBehaviour <|-- TestDatabaseHandler
+class UsersAndScores {
+    + UsersAndScores()
+    + add(username:string, score:Score) : void
+    + getUserScores(username:string) : List<Tuple<string, string>>
+    + getAllScores() : List<Tuple<string, string>>
+    + getAllScoresOrdered() : List<Tuple<string, string>>
+}
+class GameOverMenu {
+    + <<override>> OnNetworkSpawn() : void
+    + ShowClientRpc() : void
+    + RestartServerRpc() : void
+    + MainMenuServerRpc() : void
+}
+NetworkBehaviour <|-- GameOverMenu
+class LobbyMenuManager {
+    + StartGame() : void
+}
+MonoBehaviour <|-- LobbyMenuManager
+class MainMenuPage <<struct>> {
+    + pageName : string
+}
+class MainMenuManager {
+    + ShowPage(page:string) : void
+    + Quit() : void
+}
+MainMenuPage --> "page" GameObject
+MonoBehaviour <|-- MainMenuManager
+class NetworkConnect {
+    + OnHostButtonClicked() : void
+    + OnJoinButtonClicked() : void
+}
+MonoBehaviour <|-- NetworkConnect
+class ClientPlayer {
+    + <<override>> OnNetworkSpawn() : void
+}
+NetworkBehaviour <|-- ClientPlayer
+class PlayerSpawner {
+    + <<override>> OnNetworkSpawn() : void
+}
+NetworkBehaviour <|-- PlayerSpawner
+class Laser {
+}
+NetworkBehaviour <|-- Laser
+class Finish {
+    + OnPlayerFinish(player:GameObject) : void
+}
+NetworkBehaviour <|-- Finish
+class LevelManager {
+    + RegisterPlayer(player:PlayerController2D) : void
+    + GameOver(finished:bool) : void
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- LevelManager
+LevelManager --> "Instance" LevelManager
+LevelManager --> "Players<PlayerController2D>" "List`1"
+LevelManager --> "Laser" Transform
+LevelManager --> "Finish" Transform
+class PlayerProgressBar {
+}
+MonoBehaviour <|-- PlayerProgressBar
+class LeaderboardButton {
+    + onClickMainMenu() : void
+}
+MonoBehaviour <|-- LeaderboardButton
+class LeaderboardManager {
+    Start() : void
+}
+MonoBehaviour <|-- LeaderboardManager
+class CameraController {
+}
+MonoBehaviour <|-- CameraController
+CameraController --> "Target" PlayerController2D
+class PlayerGraphicsController {
+}
+NetworkBehaviour <|-- PlayerGraphicsController
+class PlayerInteract {
+    + <<override>> OnNetworkSpawn() : void
+    + <<override>> OnNetworkDespawn() : void
+}
+NetworkBehaviour <|-- PlayerInteract
+class PlayerController2D {
+    + Moving : bool <<get>>
+    + Grounded : bool <<get>>
+    + MoveDirection : float <<get>>
+}
+MonoBehaviour <|-- PlayerController2D
+class ScoreManager {
+    + Score : int <<get>>
+    + AddScoreServerRpc(score:int) : void
+}
+NetworkBehaviour <|-- ScoreManager
+ScoreManager --> "Instance" ScoreManager
+class ClientEventInteractable {
+    + Interact() : void
+}
+NetworkBehaviour <|-- ClientEventInteractable
+IInteractable <|-- ClientEventInteractable
+interface IInteractable {
+    + Interact() : void
+}
+class PlayerTouch {
+}
+NetworkBehaviour <|-- PlayerTouch
+class PatternPuzzle {
+    + <<override>> OnNetworkSpawn() : void
+    + AttemptMatchServerRpc(pattern:int) : void
+}
+Puzzle <|-- PatternPuzzle
+class PatternPuzzleInteractable {
+    + <<override>> OnNetworkSpawn() : void
+    + SetPatternServerRpc(pattern:int) : void
+    + Interact() : void
+}
+NetworkBehaviour <|-- PatternPuzzleInteractable
+IInteractable <|-- PatternPuzzleInteractable
+abstract class Puzzle {
+}
+NetworkBehaviour <|-- Puzzle
+@enduml

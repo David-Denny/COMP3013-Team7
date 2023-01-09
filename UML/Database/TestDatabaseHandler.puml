@@ -1,0 +1,10 @@
+@startuml
+class TestDatabaseHandler {
+    + {static} testUploadScore() : void
+    + {static} testDeleteScore() : void
+    + {static} testGetUserScores() : void
+    + {static} testGetAllScores() : void
+    + {static} testGetAllScoresOrdered() : void
+}
+MonoBehaviour <|-- TestDatabaseHandler
+@enduml

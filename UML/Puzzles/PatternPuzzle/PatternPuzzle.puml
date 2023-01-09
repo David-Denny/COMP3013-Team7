@@ -1,0 +1,7 @@
+@startuml
+class PatternPuzzle {
+    + <<override>> OnNetworkSpawn() : void
+    + AttemptMatchServerRpc(pattern:int) : void
+}
+Puzzle <|-- PatternPuzzle
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class NetworkConnect {
+    + OnHostButtonClicked() : void
+    + OnJoinButtonClicked() : void
+}
+MonoBehaviour <|-- NetworkConnect
+@enduml

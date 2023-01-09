@@ -1,0 +1,6 @@
+@startuml
+class ClientPlayer {
+    + <<override>> OnNetworkSpawn() : void
+}
+NetworkBehaviour <|-- ClientPlayer
+@enduml

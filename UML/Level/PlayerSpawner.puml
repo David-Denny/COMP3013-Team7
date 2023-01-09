@@ -1,0 +1,6 @@
+@startuml
+class PlayerSpawner {
+    + <<override>> OnNetworkSpawn() : void
+}
+NetworkBehaviour <|-- PlayerSpawner
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class Finish {
+    + OnPlayerFinish(player:GameObject) : void
+}
+NetworkBehaviour <|-- Finish
+@enduml

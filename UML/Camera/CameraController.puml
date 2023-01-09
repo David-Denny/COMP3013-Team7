@@ -1,0 +1,6 @@
+@startuml
+class CameraController {
+}
+MonoBehaviour <|-- CameraController
+CameraController --> "Target" PlayerController2D
+@enduml
