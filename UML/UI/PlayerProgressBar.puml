@@ -1,5 +1,14 @@
 @startuml
 class PlayerProgressBar {
+    - _markerPadding : float = 2f
+    - Awake() : void
+    - Update() : void
+}
+class "List`1"<T> {
 }
 MonoBehaviour <|-- PlayerProgressBar
+PlayerProgressBar --> "_progressBar" RectMask2D
+PlayerProgressBar --> "_markerPrefab" GameObject
+PlayerProgressBar --> "_transform" RectTransform
+PlayerProgressBar o-> "_playerMarkers<RectTransform>" "List`1"
 @enduml

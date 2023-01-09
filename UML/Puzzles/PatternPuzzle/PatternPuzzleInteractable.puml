@@ -2,8 +2,15 @@
 class PatternPuzzleInteractable {
     + <<override>> OnNetworkSpawn() : void
     + SetPatternServerRpc(pattern:int) : void
+    - RefreshDisplayedPattern() : void
     + Interact() : void
+}
+class "NetworkVariable`1"<T> {
 }
 NetworkBehaviour <|-- PatternPuzzleInteractable
 IInteractable <|-- PatternPuzzleInteractable
+PatternPuzzleInteractable --> "_screen" SpriteRenderer
+PatternPuzzleInteractable --> "_patternPuzzle" PatternPuzzle
+PatternPuzzleInteractable --> "_switchAnimator" Animator
+PatternPuzzleInteractable o-> "_pattern<int>" "NetworkVariable`1"
 @enduml

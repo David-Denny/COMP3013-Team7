@@ -1,8 +1,20 @@
 @startuml
 class ScoreManager {
     + Score : int <<get>>
+    - _distanceScoreWorth : int
+    - _maxT : float = 0f
+    - _puzzleScore : int = 0
+    - Awake() : void
+    - Start() : void
+    - Update() : void
     + AddScoreServerRpc(score:int) : void
+    - RecalculateScoreServerRpc() : void
+}
+class "NetworkVariable`1"<T> {
 }
 NetworkBehaviour <|-- ScoreManager
+ScoreManager --> "_instance" ScoreManager
 ScoreManager --> "Instance" ScoreManager
+ScoreManager --> "_scoreText" Text
+ScoreManager o-> "_score<int>" "NetworkVariable`1"
 @enduml

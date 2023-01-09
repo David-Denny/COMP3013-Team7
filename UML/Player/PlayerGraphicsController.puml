@@ -1,5 +1,16 @@
 @startuml
 class PlayerGraphicsController {
+    - Awake() : void
+    - Update() : void
+}
+class "NetworkVariable`1"<T> {
 }
 NetworkBehaviour <|-- PlayerGraphicsController
+PlayerGraphicsController --> "playerRenderer" SpriteRenderer
+PlayerGraphicsController --> "markerRenderer" SpriteRenderer
+PlayerGraphicsController --> "ownerColor" Color
+PlayerGraphicsController --> "otherColor" Color
+PlayerGraphicsController --> "playerController" PlayerController2D
+PlayerGraphicsController --> "animator" Animator
+PlayerGraphicsController o-> "_flip<bool>" "NetworkVariable`1"
 @enduml

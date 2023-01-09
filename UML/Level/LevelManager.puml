@@ -1,5 +1,7 @@
 @startuml
 class LevelManager {
+    - _finishScore : int
+    - Awake() : void
     + RegisterPlayer(player:PlayerController2D) : void
     + GameOver(finished:bool) : void
 }
@@ -7,7 +9,12 @@ class "List`1"<T> {
 }
 MonoBehaviour <|-- LevelManager
 LevelManager --> "Instance" LevelManager
+LevelManager --> "_instance" LevelManager
 LevelManager --> "Players<PlayerController2D>" "List`1"
 LevelManager --> "Laser" Transform
 LevelManager --> "Finish" Transform
+LevelManager --> "_laser" Transform
+LevelManager --> "_finish" Transform
+LevelManager --> "_gameOverMenu" GameOverMenu
+LevelManager o-> "_players<PlayerController2D>" "List`1"
 @enduml

@@ -3,4 +3,7 @@ class LeaderboardManager {
     Start() : void
 }
 MonoBehaviour <|-- LeaderboardManager
+LeaderboardManager --> "_leftContainer" RectTransform
+LeaderboardManager --> "_rightContainer" RectTransform
+LeaderboardManager --> "_scorePrefab" GameObject
 @enduml

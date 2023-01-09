@@ -3,9 +3,16 @@ class MainMenuPage <<struct>> {
     + pageName : string
 }
 class MainMenuManager {
+    - _startPage : string
+    - Awake() : void
+    - Start() : void
     + ShowPage(page:string) : void
     + Quit() : void
 }
+class "Dictionary`2"<T1,T2> {
+}
 MainMenuPage --> "page" GameObject
 MonoBehaviour <|-- MainMenuManager
+MainMenuManager o-> "_pageDict<string,GameObject>" "Dictionary`2"
+MainMenuManager --> "_currentPage" GameObject
 @enduml

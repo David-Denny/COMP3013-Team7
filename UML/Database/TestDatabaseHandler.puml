@@ -1,5 +1,6 @@
 @startuml
 class TestDatabaseHandler {
+    - {static} OnAppStart() : void
     + {static} testUploadScore() : void
     + {static} testDeleteScore() : void
     + {static} testGetUserScores() : void

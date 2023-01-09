@@ -1,5 +1,9 @@
 @startuml
 class CameraController {
+    - _min : float = 0.0f
+    - _max : float
+    - Update() : void
+    - OnDrawGizmos() : void
 }
 MonoBehaviour <|-- CameraController
 CameraController --> "Target" PlayerController2D

@@ -1,7 +1,13 @@
 @startuml
 class PlayerInteract {
+    - interactionRadius : float
     + <<override>> OnNetworkSpawn() : void
     + <<override>> OnNetworkDespawn() : void
+    - TryInteractServerRPC() : void
+    - OnDrawGizmos() : void
 }
 NetworkBehaviour <|-- PlayerInteract
+PlayerInteract --> "interactionOffset" Vector2
+PlayerInteract --> "interactMask" LayerMask
+PlayerInteract --> "inputMap" InputMap
 @enduml

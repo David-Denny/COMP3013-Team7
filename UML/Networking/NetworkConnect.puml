@@ -1,7 +1,14 @@
 @startuml
 class NetworkConnect {
+    - Start() : void
     + OnHostButtonClicked() : void
     + OnJoinButtonClicked() : void
+    - UpdateIP() : bool
+    - SetFeedbackMessage(message:string) : void
+    - ClearFeebackMessage() : void
 }
 MonoBehaviour <|-- NetworkConnect
+NetworkConnect --> "_ipInputField" InputField
+NetworkConnect --> "_feedbackText" Text
+NetworkConnect --> "_transport" UnityTransport
 @enduml

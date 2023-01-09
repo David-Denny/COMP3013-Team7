@@ -6,4 +6,7 @@ class UsersAndScores {
     + getAllScores() : List<Tuple<string, string>>
     + getAllScoresOrdered() : List<Tuple<string, string>>
 }
+class "List`1"<T> {
+}
+UsersAndScores o-> "_allUsersAndScores<Tuple<string, string>>" "List`1"
 @enduml

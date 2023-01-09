@@ -1,7 +1,25 @@
 @startuml
 class PatternPuzzle {
+    - _sequenceLength : int
+    - _barrierOpenTime : float
+    - _upperStart : float
+    - _upperEnd : float
+    - _lowerStart : float
+    - _lowerEnd : float
+    - _currentMatches : int = 0
+    - _finished : bool = false
+    - _barrierTimer : float = 0.0f
     + <<override>> OnNetworkSpawn() : void
+    - Update() : void
     + AttemptMatchServerRpc(pattern:int) : void
+    - ShowNewPatternServerRpc() : void
+    - OnPatternSuccessClientRpc() : void
+}
+class "NetworkVariable`1"<T> {
 }
 Puzzle <|-- PatternPuzzle
+PatternPuzzle --> "_targetScreen" SpriteRenderer
+PatternPuzzle --> "_upperBarrier" Transform
+PatternPuzzle --> "_lowerBarrier" Transform
+PatternPuzzle o-> "_currentPattern<int>" "NetworkVariable`1"
 @enduml

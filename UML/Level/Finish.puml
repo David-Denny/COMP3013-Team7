@@ -2,5 +2,8 @@
 class Finish {
     + OnPlayerFinish(player:GameObject) : void
 }
+class "HashSet`1"<T> {
+}
 NetworkBehaviour <|-- Finish
+Finish o-> "_finishedPlayers<ulong>" "HashSet`1"
 @enduml

@@ -1,5 +1,13 @@
 @startuml
 class Laser {
+    - _startPosition : float
+    - _endPosition : float
+    - _time : float
+    - _timing : bool = false
+    - _currentTime : float = 0.0f
+    - Start() : void
+    - Update() : void
+    - OnDrawGizmos() : void
 }
 NetworkBehaviour <|-- Laser
 @enduml

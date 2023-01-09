@@ -1,5 +1,9 @@
 @startuml
 class PlayerTouch {
+    - OnTriggerEnter2D(collision:Collider2D) : void
+}
+class "UnityEvent`1"<T> {
 }
 NetworkBehaviour <|-- PlayerTouch
+PlayerTouch --> "_onPlayerTouch<GameObject>" "UnityEvent`1"
 @enduml

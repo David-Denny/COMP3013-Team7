@@ -1,6 +1,11 @@
 @startuml
 class PlayerSpawner {
+    - _spawnIndex : int = 0
     + <<override>> OnNetworkSpawn() : void
+    - OnClientConnectedCallback(clientId:ulong) : void
+    - OnLoadEventCompleted(sceneName:string, loadSceneMode:UnityEngine.SceneManagement.LoadSceneMode, clientsCompleted:List<ulong>, clientsTimedOut:List<ulong>) : void
+    - SpawnPlayer(clientId:ulong) : void
 }
 NetworkBehaviour <|-- PlayerSpawner
+PlayerSpawner --> "_playerPrefab" GameObject
 @enduml

@@ -4,6 +4,12 @@ class GameOverMenu {
     + ShowClientRpc() : void
     + RestartServerRpc() : void
     + MainMenuServerRpc() : void
+    - OnClientDisconnected(obj:ulong) : void
+    - DisconnectClientsClientRpc() : void
 }
 NetworkBehaviour <|-- GameOverMenu
+GameOverMenu --> "_menuPage" GameObject
+GameOverMenu --> "_scoreText" Text
+GameOverMenu --> "_menuButton" GameObject
+GameOverMenu --> "_restartButton" GameObject
 @enduml

@@ -1,8 +1,21 @@
 @startuml
 class PlayerController2D {
+    - _moveSpeed : float
+    - _jumpSpeed : float
+    - _grounded : bool = false
     + Moving : bool <<get>>
     + Grounded : bool <<get>>
     + MoveDirection : float <<get>>
+    - Awake() : void
+    - Start() : void
+    - OnDisable() : void
+    - Update() : void
+    - Jump() : void
 }
 MonoBehaviour <|-- PlayerController2D
+PlayerController2D --> "_groundMask" LayerMask
+PlayerController2D --> "_inputMap" InputMap
+PlayerController2D --> "_rigidbody" Rigidbody2D
+PlayerController2D --> "_collider" BoxCollider2D
+PlayerController2D --> "_audioSource" AudioSource
 @enduml

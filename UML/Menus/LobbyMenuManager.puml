@@ -1,6 +1,9 @@
 @startuml
 class LobbyMenuManager {
+    - Start() : void
+    - OnClientConnectedCallback(obj:ulong) : void
     + StartGame() : void
 }
 MonoBehaviour <|-- LobbyMenuManager
+LobbyMenuManager --> "_startButton" Button
 @enduml

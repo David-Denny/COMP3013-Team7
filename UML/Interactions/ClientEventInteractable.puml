@@ -1,7 +1,9 @@
 @startuml
 class ClientEventInteractable {
     + Interact() : void
+    - PerformEventClientRpc() : void
 }
 NetworkBehaviour <|-- ClientEventInteractable
 IInteractable <|-- ClientEventInteractable
+ClientEventInteractable --> "onInteract" UnityEvent
 @enduml

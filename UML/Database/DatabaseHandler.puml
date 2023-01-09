@@ -1,5 +1,7 @@
 @startuml
 class DatabaseHandler {
+    - <<const>> projectId : string = "comp3018-team7"
+    - databaseUrl : string
     + DatabaseHandler()
     + DatabaseHandler(url:string)
     + postScore(username:string, score:int, callback:PostScoreCallback) : void

@@ -1,6 +1,8 @@
 @startuml
 class ClientPlayer {
+    - Awake() : void
     + <<override>> OnNetworkSpawn() : void
 }
 NetworkBehaviour <|-- ClientPlayer
+ClientPlayer --> "_playerController" PlayerController2D
 @enduml

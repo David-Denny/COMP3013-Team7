@@ -1,5 +1,7 @@
 @startuml
 class DatabaseHandler {
+    - <<const>> projectId : string = "comp3018-team7"
+    - databaseUrl : string
     + DatabaseHandler()
     + DatabaseHandler(url:string)
     + postScore(username:string, score:int, callback:PostScoreCallback) : void
@@ -15,6 +17,7 @@ class Score {
     + Score(score:string)
 }
 class TestDatabaseHandler {
+    - {static} OnAppStart() : void
     + {static} testUploadScore() : void
     + {static} testDeleteScore() : void
     + {static} testGetUserScores() : void
@@ -29,47 +32,93 @@ class UsersAndScores {
     + getAllScores() : List<Tuple<string, string>>
     + getAllScoresOrdered() : List<Tuple<string, string>>
 }
+class "List`1"<T> {
+}
+UsersAndScores o-> "_allUsersAndScores<Tuple<string, string>>" "List`1"
 class GameOverMenu {
     + <<override>> OnNetworkSpawn() : void
     + ShowClientRpc() : void
     + RestartServerRpc() : void
     + MainMenuServerRpc() : void
+    - OnClientDisconnected(obj:ulong) : void
+    - DisconnectClientsClientRpc() : void
 }
 NetworkBehaviour <|-- GameOverMenu
+GameOverMenu --> "_menuPage" GameObject
+GameOverMenu --> "_scoreText" Text
+GameOverMenu --> "_menuButton" GameObject
+GameOverMenu --> "_restartButton" GameObject
 class LobbyMenuManager {
+    - Start() : void
+    - OnClientConnectedCallback(obj:ulong) : void
     + StartGame() : void
 }
 MonoBehaviour <|-- LobbyMenuManager
+LobbyMenuManager --> "_startButton" Button
 class MainMenuPage <<struct>> {
     + pageName : string
 }
 class MainMenuManager {
+    - _startPage : string
+    - Awake() : void
+    - Start() : void
     + ShowPage(page:string) : void
     + Quit() : void
 }
+class "Dictionary`2"<T1,T2> {
+}
 MainMenuPage --> "page" GameObject
 MonoBehaviour <|-- MainMenuManager
+MainMenuManager o-> "_pageDict<string,GameObject>" "Dictionary`2"
+MainMenuManager --> "_currentPage" GameObject
 class NetworkConnect {
+    - Start() : void
     + OnHostButtonClicked() : void
     + OnJoinButtonClicked() : void
+    - UpdateIP() : bool
+    - SetFeedbackMessage(message:string) : void
+    - ClearFeebackMessage() : void
 }
 MonoBehaviour <|-- NetworkConnect
+NetworkConnect --> "_ipInputField" InputField
+NetworkConnect --> "_feedbackText" Text
+NetworkConnect --> "_transport" UnityTransport
 class ClientPlayer {
+    - Awake() : void
     + <<override>> OnNetworkSpawn() : void
 }
 NetworkBehaviour <|-- ClientPlayer
+ClientPlayer --> "_playerController" PlayerController2D
 class PlayerSpawner {
+    - _spawnIndex : int = 0
     + <<override>> OnNetworkSpawn() : void
+    - OnClientConnectedCallback(clientId:ulong) : void
+    - OnLoadEventCompleted(sceneName:string, loadSceneMode:UnityEngine.SceneManagement.LoadSceneMode, clientsCompleted:List<ulong>, clientsTimedOut:List<ulong>) : void
+    - SpawnPlayer(clientId:ulong) : void
 }
 NetworkBehaviour <|-- PlayerSpawner
+PlayerSpawner --> "_playerPrefab" GameObject
 class Laser {
+    - _startPosition : float
+    - _endPosition : float
+    - _time : float
+    - _timing : bool = false
+    - _currentTime : float = 0.0f
+    - Start() : void
+    - Update() : void
+    - OnDrawGizmos() : void
 }
 NetworkBehaviour <|-- Laser
 class Finish {
     + OnPlayerFinish(player:GameObject) : void
 }
+class "HashSet`1"<T> {
+}
 NetworkBehaviour <|-- Finish
+Finish o-> "_finishedPlayers<ulong>" "HashSet`1"
 class LevelManager {
+    - _finishScore : int
+    - Awake() : void
     + RegisterPlayer(player:PlayerController2D) : void
     + GameOver(finished:bool) : void
 }
@@ -77,12 +126,26 @@ class "List`1"<T> {
 }
 MonoBehaviour <|-- LevelManager
 LevelManager --> "Instance" LevelManager
+LevelManager --> "_instance" LevelManager
 LevelManager --> "Players<PlayerController2D>" "List`1"
 LevelManager --> "Laser" Transform
 LevelManager --> "Finish" Transform
+LevelManager --> "_laser" Transform
+LevelManager --> "_finish" Transform
+LevelManager --> "_gameOverMenu" GameOverMenu
+LevelManager o-> "_players<PlayerController2D>" "List`1"
 class PlayerProgressBar {
+    - _markerPadding : float = 2f
+    - Awake() : void
+    - Update() : void
+}
+class "List`1"<T> {
 }
 MonoBehaviour <|-- PlayerProgressBar
+PlayerProgressBar --> "_progressBar" RectMask2D
+PlayerProgressBar --> "_markerPrefab" GameObject
+PlayerProgressBar --> "_transform" RectTransform
+PlayerProgressBar o-> "_playerMarkers<RectTransform>" "List`1"
 class LeaderboardButton {
     + onClickMainMenu() : void
 }
@@ -91,54 +154,136 @@ class LeaderboardManager {
     Start() : void
 }
 MonoBehaviour <|-- LeaderboardManager
+LeaderboardManager --> "_leftContainer" RectTransform
+LeaderboardManager --> "_rightContainer" RectTransform
+LeaderboardManager --> "_scorePrefab" GameObject
 class CameraController {
+    - _min : float = 0.0f
+    - _max : float
+    - Update() : void
+    - OnDrawGizmos() : void
 }
 MonoBehaviour <|-- CameraController
 CameraController --> "Target" PlayerController2D
 class PlayerGraphicsController {
+    - Awake() : void
+    - Update() : void
+}
+class "NetworkVariable`1"<T> {
 }
 NetworkBehaviour <|-- PlayerGraphicsController
+PlayerGraphicsController --> "playerRenderer" SpriteRenderer
+PlayerGraphicsController --> "markerRenderer" SpriteRenderer
+PlayerGraphicsController --> "ownerColor" Color
+PlayerGraphicsController --> "otherColor" Color
+PlayerGraphicsController --> "playerController" PlayerController2D
+PlayerGraphicsController --> "animator" Animator
+PlayerGraphicsController o-> "_flip<bool>" "NetworkVariable`1"
 class PlayerInteract {
+    - interactionRadius : float
     + <<override>> OnNetworkSpawn() : void
     + <<override>> OnNetworkDespawn() : void
+    - TryInteractServerRPC() : void
+    - OnDrawGizmos() : void
 }
 NetworkBehaviour <|-- PlayerInteract
+PlayerInteract --> "interactionOffset" Vector2
+PlayerInteract --> "interactMask" LayerMask
+PlayerInteract --> "inputMap" InputMap
 class PlayerController2D {
+    - _moveSpeed : float
+    - _jumpSpeed : float
+    - _grounded : bool = false
     + Moving : bool <<get>>
     + Grounded : bool <<get>>
     + MoveDirection : float <<get>>
+    - Awake() : void
+    - Start() : void
+    - OnDisable() : void
+    - Update() : void
+    - Jump() : void
 }
 MonoBehaviour <|-- PlayerController2D
+PlayerController2D --> "_groundMask" LayerMask
+PlayerController2D --> "_inputMap" InputMap
+PlayerController2D --> "_rigidbody" Rigidbody2D
+PlayerController2D --> "_collider" BoxCollider2D
+PlayerController2D --> "_audioSource" AudioSource
 class ScoreManager {
     + Score : int <<get>>
+    - _distanceScoreWorth : int
+    - _maxT : float = 0f
+    - _puzzleScore : int = 0
+    - Awake() : void
+    - Start() : void
+    - Update() : void
     + AddScoreServerRpc(score:int) : void
+    - RecalculateScoreServerRpc() : void
+}
+class "NetworkVariable`1"<T> {
 }
 NetworkBehaviour <|-- ScoreManager
+ScoreManager --> "_instance" ScoreManager
 ScoreManager --> "Instance" ScoreManager
+ScoreManager --> "_scoreText" Text
+ScoreManager o-> "_score<int>" "NetworkVariable`1"
 class ClientEventInteractable {
     + Interact() : void
+    - PerformEventClientRpc() : void
 }
 NetworkBehaviour <|-- ClientEventInteractable
 IInteractable <|-- ClientEventInteractable
+ClientEventInteractable --> "onInteract" UnityEvent
 interface IInteractable {
     + Interact() : void
 }
 class PlayerTouch {
+    - OnTriggerEnter2D(collision:Collider2D) : void
+}
+class "UnityEvent`1"<T> {
 }
 NetworkBehaviour <|-- PlayerTouch
+PlayerTouch --> "_onPlayerTouch<GameObject>" "UnityEvent`1"
 class PatternPuzzle {
+    - _sequenceLength : int
+    - _barrierOpenTime : float
+    - _upperStart : float
+    - _upperEnd : float
+    - _lowerStart : float
+    - _lowerEnd : float
+    - _currentMatches : int = 0
+    - _finished : bool = false
+    - _barrierTimer : float = 0.0f
     + <<override>> OnNetworkSpawn() : void
+    - Update() : void
     + AttemptMatchServerRpc(pattern:int) : void
+    - ShowNewPatternServerRpc() : void
+    - OnPatternSuccessClientRpc() : void
+}
+class "NetworkVariable`1"<T> {
 }
 Puzzle <|-- PatternPuzzle
+PatternPuzzle --> "_targetScreen" SpriteRenderer
+PatternPuzzle --> "_upperBarrier" Transform
+PatternPuzzle --> "_lowerBarrier" Transform
+PatternPuzzle o-> "_currentPattern<int>" "NetworkVariable`1"
 class PatternPuzzleInteractable {
     + <<override>> OnNetworkSpawn() : void
     + SetPatternServerRpc(pattern:int) : void
+    - RefreshDisplayedPattern() : void
     + Interact() : void
+}
+class "NetworkVariable`1"<T> {
 }
 NetworkBehaviour <|-- PatternPuzzleInteractable
 IInteractable <|-- PatternPuzzleInteractable
+PatternPuzzleInteractable --> "_screen" SpriteRenderer
+PatternPuzzleInteractable --> "_patternPuzzle" PatternPuzzle
+PatternPuzzleInteractable --> "_switchAnimator" Animator
+PatternPuzzleInteractable o-> "_pattern<int>" "NetworkVariable`1"
 abstract class Puzzle {
+    - _completionScore : int
+    # PuzzleCompletedServerRpc() : void
 }
 NetworkBehaviour <|-- Puzzle
 @enduml
